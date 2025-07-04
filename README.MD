@@ -13,7 +13,7 @@ npm - v
 위 명령어 입력하면 각각 Node.js 와 npm 버전 확인가능
 
 ### 2. React 프로젝트 생성
-가장 간단한 방법 Facebook에서 제공하는 Create React App 도구를 사용
+가장 간단한 방법 Facebook에서 제공하는 Create React App 도구를 사용.<br>
 Create React App는 초기 설정을 자동으로 처리해줘서 편리함.
 
 ```
