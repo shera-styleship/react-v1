@@ -16,6 +16,7 @@ npm install
 npm run dev
 ```
 
+---
 
 
 ## Node.js 환경 설정
@@ -49,7 +50,7 @@ npm run dev
   npm run start
   ```
 
-
+---
 
 ## 모듈 시스템 이해
 
@@ -87,7 +88,7 @@ import mul, { add } from './math.js';
 console.log(mul(2, 3)); // 6
 ```
 
-
+---
 
 ## JSX 문법 및 주의사항
 
@@ -116,7 +117,7 @@ return (
 - `class`는 `className`, `style`은 camelCase (`backgroundColor`)
 - 숫자, 문자열, 배열 값만 렌더링됨. `true`, `undefined`, `null`은 렌더링되지 않음
 
-
+---
 
 ##  컴포넌트 이해
 
@@ -144,7 +145,7 @@ function App() {
 }
 ```
 
-
+---
 
 ##  import / export 문법 정리
 
@@ -204,7 +205,7 @@ export { Red, Blue };
   ```js
 import Color, { Red, Blue } from './Color';
   ```
-
+---
 
 ## Props / State
 ### Props : 부모가 자식에게 전달하는 데이터
@@ -281,7 +282,7 @@ export default Counter;
 
 ```
 
-
+---
 
 ## 필수 툴 및 확장 기능
 
