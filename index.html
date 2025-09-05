@@ -1,0 +1,190 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>마우스오버시 이미지 노출</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<style>
+  /* 데모 레이아웃 */
+  
+
+  ul { list-style:none; padding:0; margin:0; }
+  li {
+    padding:14px 16px;
+    margin:10px 0;
+    background:#182023;
+    border:1px solid #223036;
+    border-radius:12px;
+    cursor:pointer;
+    transition: background .18s ease, transform .12s ease;
+	color: white;
+  }
+  li:hover { background:#1e2a2e; transform: translateY(-1px); }
+
+  /* === 이미지 카드 === */
+  #serviceCard {
+    position:fixed;
+    left:0; top:0;
+    width:280px;               /* 카드 가로 크기 */
+    pointer-events:none;       /* 카드 위에서도 hover 유지 */
+    z-index:9999;
+    transform: translate(-9999px, -9999px);
+    will-change: transform, opacity;
+  }
+  .card-outer {
+    border-radius:16px;
+    overflow:hidden;
+    box-shadow: 0 18px 50px rgba(0,0,0,.45);
+    background:#0c0f0e;
+    /* 나타날 때/사라질 때 부드럽게 */
+    opacity:0;
+    transform: translateY(6px) scale(.98);
+    transition: opacity .25s ease, transform .25s ease;
+  }
+  #serviceCard[data-visible="true"] .card-outer {
+    opacity:1;
+    transform: translateY(0) scale(1);
+  }
+
+  /* 이미지 스택(교차 페이드) */
+  .img-stack {
+    position:relative;
+    width:100%;
+    aspect-ratio: 4 / 5; /* 1080×1350 기준 */
+    overflow:hidden;
+  }
+  .img {
+    position:absolute;
+    inset:0;
+    opacity:0;
+    transform: scale(1.03);
+    transition: opacity .28s ease, transform .28s ease;
+  }
+  .img.is-active {
+    opacity:1;
+    transform: scale(1);
+  }
+  .img > img {
+    width:100%; height:100%; display:block; object-fit:cover;
+    user-select:none; -webkit-user-drag:none;
+  }
+</style>
+</head>
+<body>
+<main>
+  <ul id="serviceList">
+    <li data-img="0">LIST 1</li>
+    <li data-img="1">LIST 2</li>
+    <li data-img="2">LIST 3</li>
+    <li data-img="3">LIST 4</li>
+  </ul>
+</main>
+
+<!-- 이미지 카드 -->
+<div id="serviceCard" data-visible="false" aria-hidden="true">
+  <div class="card-outer">
+    <div class="img-stack">
+      <div class="img" data-idx="0">
+        <img src="https://www.jamarea.com/cms//uploads/Senza_titolo_6_e9f0c6f91e.jpg" alt="">
+      </div>
+      <div class="img" data-idx="1">
+        <img src="https://www.jamarea.com/cms//uploads/Ritmonio_verticale_anteprima_addfa3a727.jpg" alt="">
+      </div>
+      <div class="img" data-idx="2">
+        <img src="https://filacdn.styleship.com/filacontent2/data/banner/main_800x800_M_25_2.jpg" alt="">
+      </div>
+      <div class="img" data-idx="3">
+        <img src="https://filacdn.styleship.com/filacontent2/data/banner/main_800x800_M_40.jpg" alt="">
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+/** 설정: "cursor"면 커서 근처, "center"면 화면 중앙 고정 */
+const POSITION_MODE = "cursor"; // "cursor" | "center"
+/** 커서 모드일 때 카드와 커서 사이 오프셋(px) */
+const CURSOR_OFFSET = { x: 22, y: 18 };
+/** 따라오는 부드러움(0.12~0.3 권장) */
+const FOLLOW_EASE = 0.18;
+
+const card = document.getElementById('serviceCard');
+const stackImgs = [...card.querySelectorAll('.img')];
+const listItems = [...document.querySelectorAll('#serviceList li')];
+
+let isActive = false;
+let rafId = null;
+let targetX = -9999, targetY = -9999;
+let currX = -9999, currY = -9999;
+
+/* 위치 업데이트 루프 (rAF) */
+function loop() {
+  currX += (targetX - currX) * FOLLOW_EASE;
+  currY += (targetY - currY) * FOLLOW_EASE;
+  card.style.transform = `translate(${currX}px, ${currY}px)`;
+  rafId = requestAnimationFrame(loop);
+}
+
+/* 이미지 교체(교차 페이드) */
+function activate(idx) {
+  stackImgs.forEach(el => el.classList.remove('is-active'));
+  const el = stackImgs.find(n => Number(n.dataset.idx) === Number(idx));
+  if (el) el.classList.add('is-active');
+}
+
+/* 카드 표시/숨김 */
+function showCard() {
+  if (isActive) return;
+  isActive = true;
+  card.dataset.visible = "true";
+  card.setAttribute('aria-hidden', 'false');
+  if (!rafId) rafId = requestAnimationFrame(loop);
+}
+function hideCard() {
+  isActive = false;
+  card.dataset.visible = "false";
+  card.setAttribute('aria-hidden', 'true');
+  cancelAnimationFrame(rafId);
+  rafId = null;
+  currX = targetX = -9999;
+  currY = targetY = -9999;
+  card.style.transform = `translate(${currX}px, ${currY}px)`;
+}
+
+/* 포지셔닝 계산 */
+function moveToPointer(e) {
+  if (POSITION_MODE === "center") {
+    const rect = card.getBoundingClientRect(); // 카드 크기
+    const cx = window.innerWidth / 2 - rect.width / 2;
+    const cy = window.innerHeight / 2 - rect.height / 2;
+    targetX = cx;
+    targetY = cy;
+  } else {
+    targetX = e.clientX + CURSOR_OFFSET.x;
+    targetY = e.clientY + CURSOR_OFFSET.y;
+  }
+}
+
+/* 이벤트 바인딩 */
+listItems.forEach(li => {
+  li.addEventListener('pointerenter', e => {
+    activate(li.dataset.img);
+    moveToPointer(e);         // 첫 위치 즉시 반영
+    currX = targetX; currY = targetY;
+    card.style.transform = `translate(${currX}px, ${currY}px)`;
+    showCard();
+  });
+  li.addEventListener('pointermove', e => {
+    if (!isActive) return;
+    moveToPointer(e);
+  });
+  li.addEventListener('pointerleave', () => {
+    hideCard();
+  });
+});
+
+/* 창 포커스 이탈 시 깔끔 정리 */
+window.addEventListener('blur', hideCard);
+</script>
+</body>
+</html>
