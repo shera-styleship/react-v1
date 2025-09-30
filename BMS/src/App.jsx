@@ -4,7 +4,7 @@ import LogoStyleship from "./assets/common/logo_styleship.png";
 import ProfileImg from "./assets/profile-img.JPG";
 
 import { useState } from "react";
-import { Routes, Route, NavLink, Link } from "react-router-dom";
+import { Routes, Route, NavLink } from "react-router-dom";
 
 import Home from "./pages/Home";
 import Project from "./pages/Project";
