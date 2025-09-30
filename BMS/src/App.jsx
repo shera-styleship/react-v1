@@ -1,12 +1,18 @@
-import "./normalize.css";
-import "./opt-default.css";
 import "./App.css";
 
 import LogoStyleship from "./assets/common/logo_styleship.png";
 import ProfileImg from "./assets/profile-img.JPG";
 
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Routes, Route, NavLink, Link } from "react-router-dom";
+
+import Home from "./pages/Home";
+import Project from "./pages/Project";
+import MyProject from "./pages/MyProject";
+import Schedule from "./pages/Schedule";
+import Knowledge from "./pages/Knowledge";
+import Hr from "./pages/Hr";
+import Setting from "./pages/Setting";
 
 function App() {
   const [lnbToggle, setLnbToggle] = useState(true);
@@ -63,73 +69,97 @@ function App() {
         <nav className="Lnb">
           <ul className="button-list">
             <li className="project-write">
-              <Link to="">
+              <button>
                 <span className="button-icon icon-pencil"></span>
 
                 <span className="button-name">프로젝트 생성</span>
-              </Link>
+              </button>
             </li>
-            <li className="lnb-on">
-              <Link to="">
+            <li>
+              <NavLink
+                to="/Project"
+                className={({ isActive }) => `${isActive ? "lnb-on" : ""}`}
+              >
                 <span className="button-icon icon-project"></span>
 
                 <span className="button-name">프로젝트</span>
-              </Link>
+              </NavLink>
             </li>
             <li>
-              <Link to="">
+              <NavLink
+                to="/MyProject"
+                className={({ isActive }) => `${isActive ? "lnb-on" : ""}`}
+              >
                 <span className="button-icon icon-myProject"></span>
 
                 <span className="button-name">나의 프로젝트</span>
-              </Link>
+              </NavLink>
             </li>
             <li>
-              <Link to="" className="arrow-right">
+              <NavLink
+                to="/Schedule"
+                className={({ isActive }) =>
+                  `arrow-right ${isActive ? "lnb-on" : ""}`
+                }
+              >
                 <span className="button-icon icon-schedule"></span>
 
                 <span className="button-name">일정 관리</span>
-              </Link>
+              </NavLink>
             </li>
             <li>
-              <Link to="" className="arrow-right">
+              <NavLink
+                to="/Knowledge"
+                className={({ isActive }) =>
+                  `arrow-right ${isActive ? "lnb-on" : ""}`
+                }
+              >
                 <span className="button-icon icon-knowledge"></span>
 
                 <span className="button-name">사내 지식</span>
-              </Link>
+              </NavLink>
             </li>
             <li>
-              <Link to="">
+              <NavLink
+                to="/Hr"
+                className={({ isActive }) => `${isActive ? "lnb-on" : ""}`}
+              >
                 <span className="button-icon icon-hr"></span>
 
                 <span className="button-name">인사 정보</span>
-              </Link>
+              </NavLink>
             </li>
             <li>
-              <Link to="">
+              <NavLink
+                to="/Setting"
+                className={({ isActive }) => `${isActive ? "lnb-on" : ""}`}
+              >
                 <span className="button-icon icon-setting"></span>
 
                 <span className="button-name">설정</span>
-              </Link>
+              </NavLink>
             </li>
           </ul>
 
           <div className="logo-styleship">
-            <img src={LogoStyleship} alt="" />
+            <NavLink to="/">
+              <img src={LogoStyleship} alt="" />
+            </NavLink>
           </div>
         </nav>
         {/* //LNB */}
 
         {/* CONTENTS */}
         <div className="Contents">
-          <p
-            style={{
-              margin: "50px",
-              fontWeight: 700,
-              fontSize: "36px",
-            }}
-          >
-            Contents
-          </p>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/Project" element={<Project />} />
+            <Route path="/MyProject" element={<MyProject />} />
+            <Route path="/Schedule" element={<Schedule />} />
+            <Route path="/Knowledge" element={<Knowledge />} />
+            <Route path="/Hr" element={<Hr />} />
+            <Route path="/Setting" element={<Setting />} />
+          </Routes>
         </div>
         {/* //CONTENTS */}
       </div>
