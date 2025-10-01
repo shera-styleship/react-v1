@@ -1,0 +1,28 @@
+.ListItem {
+    display: flex;
+    gap: 20px;
+    width: 100%;
+    padding: 10px 0;
+}
+.ListItem + .ListItem {border-top: 1px solid rgb(126, 126, 126);}
+.ListItem .text_box {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    width: 100%;
+}
+.ListItem p {
+    font-size: 16px;
+}
+.ListItem p.tit {
+    width: 100%;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+.ListItem p.date {
+    flex-shrink: 0;
+    color: rgb(126, 126, 126);
+    min-width: 100px;
+    text-align: right;
+}

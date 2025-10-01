@@ -1,0 +1,60 @@
+.ProjectForm {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+.ProjectForm h2 {
+    font-size: 24px;
+    line-height: 44px;
+}
+.ProjectForm .form_box {
+    flex-grow: 1;
+    margin-top: 20px;
+    padding: 20px;
+    border: 2px solid rgb(126, 126, 126);
+    border-radius: 5px;
+}
+
+
+.ProjectForm .title_box {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    height: 50px;
+}
+.ProjectForm .title_box input {
+    font-size: 18px;
+    outline: none;
+}
+.ProjectForm .title_box .title {
+    font-weight: 700;
+}
+.ProjectForm .title_box .date {
+    font-family: 'Pretendard', sans-serif;
+    font-weight: 400;
+    color: rgb(126, 126, 126);
+}
+.ProjectForm .content_box {
+    margin-top: 20px;
+    padding: 20px;
+    border-radius: 5px;
+    box-sizing: border-box;
+    background-color: rgb(220, 220, 220);
+}
+.ProjectForm .content_box textarea {
+    width: 100%;
+    background: transparent;
+    font-family: 'Pretendard', sans-serif;
+    font-size: 16px;
+    outline: none;
+    resize: none;
+}
+.ProjectForm .btn_box {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    width: 100%;
+    margin-top: 20px;
+}
+.ProjectForm .btn_box button {margin-left: 20px;}

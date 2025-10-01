@@ -1,0 +1,27 @@
+.Project {
+    /*display: flex;
+    height: 100%;*/
+    flex-grow: 1;
+    max-height: calc(100% - 57px);
+}
+.Project .wrapper {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    width: 100%;
+    height: 100%;
+}
+.Project .list_box {
+    display: flex;
+    width: 500px;
+}
+.Project .view_box {
+    display: flex;
+    width: 100%;
+    box-sizing: border-box;
+}
+.Project .no-txt {
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 44px;
+}
