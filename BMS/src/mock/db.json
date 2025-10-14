@@ -35,6 +35,7 @@
       "projectNo": 0,
       "projectDate": "2025-08-06",
       "projectBrand": "NEPA",
+      "projectSort": "외부몰",
       "projectTitle": "○ [키즈] WINTER VACANCE 다운 프리오더 (8/13~9/21)",
       "projectStatus": "완료요청"
     },
@@ -44,6 +45,7 @@
       "projectNo": 1,
       "projectDate": "2025-09-06",
       "projectBrand": "NEPA",
+      "projectSort": "이벤트",
       "projectTitle": "9월 로그데이터",
       "projectStatus": "진행"
     },
@@ -53,6 +55,7 @@
       "projectNo": 2,
       "projectDate": "2025-09-16",
       "projectBrand": "FILA",
+      "projectSort": "프로모션",
       "projectTitle": "무아몽 25FW 등록",
       "projectStatus": "접수"
     },
@@ -62,6 +65,7 @@
       "projectNo": 3,
       "projectDate": "2025-10-01",
       "projectBrand": "NEPA",
+      "projectSort": "기획전",
       "projectTitle": "[클럽] 배틀레디2 다크니스 프로모션 파일 송부 요청",
       "projectStatus": "진행"
     }
