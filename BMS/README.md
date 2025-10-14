@@ -17,6 +17,10 @@ json-server --watch src/mock/db.json --port 4000
 첫화면 로그인
 
 테스트 아이디
+
 test01/1234
+
 test02/5678 (소속 styleship)
+
 test03/2580
+
