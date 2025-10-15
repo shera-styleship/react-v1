@@ -3,14 +3,7 @@ import "./App.css";
 import { Routes, Route, Navigate, Outlet, useLocation } from "react-router-dom";
 import AppLayout from "./layouts/AppLayout";
 import AuthLayout from "./layouts/AuthLayout";
-import {
-  useState,
-  useRef,
-  useReducer,
-  createContext,
-  useEffect,
-  useContext,
-} from "react";
+import { useState, createContext, useEffect, useContext } from "react";
 
 import Home from "./pages/Home";
 import Project from "./pages/Project";
@@ -21,20 +14,7 @@ import Hr from "./pages/Hr";
 import Setting from "./pages/Setting";
 import Login from "./pages/Login";
 
-function reducer(state, action) {
-  switch (action.type) {
-    case "CREATE":
-      return [...state, action.data];
-    case "UPDATE":
-      return state.map((user) =>
-        String(user.id) === String(action.data.id) ? action.data : user
-      );
-    case "DELETE":
-      return state.filter((user) => String(user.id) !== String(action.id));
-    default:
-      return state;
-  }
-}
+// 컨텍스트
 export const UserDataContext = createContext();
 export const UserDispatchContext = createContext();
 
@@ -43,7 +23,7 @@ function RequireAuth() {
   const { auth } = useContext(UserDataContext);
   const location = useLocation();
   if (!auth?.isLoggedIn) {
-    return <Navigate to="/login" replace state={{ from: location }} />;
+    return <Navigate to="/Login" replace state={{ from: location }} />;
   }
   return <Outlet />;
 }
@@ -58,9 +38,7 @@ function RequireGuest() {
 }
 
 function App() {
-  const idRef = useRef(3);
-  const [userData, dispatch] = useReducer(reducer, []);
-
+  const [userData, setUserData] = useState([]); // 서버의 사용자 목록
   const [auth, setAuth] = useState({ isLoggedIn: false, userId: null });
   const [alertState, setAlertState] = useState("");
 
@@ -74,37 +52,28 @@ function App() {
         const res = await fetch("http://localhost:4000/userInfo");
         if (!res.ok) throw new Error("Failed to load users");
         const list = await res.json();
-        list.forEach((u) => dispatch({ type: "CREATE", data: u }));
-        const maxId = list.reduce(
-          (m, u) => Math.max(m, Number(u.id)),
-          -Infinity
-        );
-        if (Number.isFinite(maxId)) idRef.current = maxId + 1;
+        setUserData(list);
       } catch (e) {
         console.error(e);
       }
     })();
   }, []);
 
-  const onCreate = (user) => {
-    dispatch({ type: "CREATE", data: { id: idRef.current++, ...user } });
-  };
-  const onUpdate = (id, patch) => {
-    const original = userData.find((u) => String(u.id) === String(id));
-    if (!original) return;
-    dispatch({ type: "UPDATE", data: { ...original, ...patch, id } });
-  };
-
+  // 로그인/로그아웃만 디스패치 컨텍스트로 제공
   const login = (id) => setAuth({ isLoggedIn: true, userId: id });
   const logout = () => setAuth({ isLoggedIn: false, userId: null });
 
   return (
     <UserDataContext.Provider
-      value={{ userData, auth, alertState, handleAlertBtn }}
+      value={{
+        userData, // 목록 조회용
+        setUserData, // 필요 시 다른 페이지에서 갱신할 수 있게 노출(선택)
+        auth,
+        alertState,
+        handleAlertBtn,
+      }}
     >
-      <UserDispatchContext.Provider
-        value={{ onCreate, login, logout, onUpdate }}
-      >
+      <UserDispatchContext.Provider value={{ login, logout }}>
         <Routes>
           {/* 비로그인 전용: 로그인 페이지 */}
           <Route element={<RequireGuest />}>
@@ -127,7 +96,7 @@ function App() {
             </Route>
           </Route>
 
-          {/* 기타 경로는 로그인/홈으로 정리 */}
+          {/* 기타 경로 정리 */}
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </UserDispatchContext.Provider>
