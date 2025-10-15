@@ -21,3 +21,20 @@ json-server --watch src/mock/db.json --port 4000
 
 
 
+## StoryBook 설치 및 사용 방법
+
+**설치 및 실행**
+
+    npx storybook@latest init
+    npm run storybook
+
+**실행 화면**
+<img width="1067" height="699" alt="Image" src="https://github.com/user-attachments/assets/d8e16c51-aac1-49cf-8c14-7deebb0eed15" />
+
+
+1. 컴포넌트 등록
+: +버튼 클릭 후 나오는 레이어에 원하는 컴포넌트 검색 후 클릭
+
+<img width="1067" height="699" alt="Image" src="https://github.com/user-attachments/assets/73151220-d335-467d-9368-4d9a073f9c5b" />
+
+<img width="580" height="515" alt="Image" src="https://github.com/user-attachments/assets/d9eb852c-52b5-40b2-bf89-a2f8e574831d" />
