@@ -181,5 +181,6 @@ a[href^="tel"] {
 }
 
 input[type="password"] {
-  font-family: sans-serif;
+  font-family: "Pretendard", sans-serif;
 }
+
