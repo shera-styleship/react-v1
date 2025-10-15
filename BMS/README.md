@@ -37,4 +37,17 @@ json-server --watch src/mock/db.json --port 4000
 
 <img width="1067" height="699" alt="Image" src="https://github.com/user-attachments/assets/73151220-d335-467d-9368-4d9a073f9c5b" />
 
-<img width="580" height="515" alt="Image" src="https://github.com/user-attachments/assets/d9eb852c-52b5-40b2-bf89-a2f8e574831d" />
+<img width="633" height="332" alt="Image" src="https://github.com/user-attachments/assets/7008a5dd-f3a4-4fc1-8acc-4f389ced257d" />
+
+2. 에디터에서 생성된 파일을 열어 내용 수정
+: 파일명.stories.jsx 파일을 열어 내용 수정
+<img width="1060" height="683" alt="Image" src="https://github.com/user-attachments/assets/c0e6eecf-8451-44b8-b5f2-67dda2e80b0c" />
+
+3. 내용 수정 후 다시 스토리북으로 가서 생성된 탭 확인
+: Docs 탭 안에 있는 내용은 
+파일명.jsx 안에 프로토 타입을 추가해주고 주석을 넣으면 자동으로 문서화 해줌.
+<img width="954" height="805" alt="Image" src="https://github.com/user-attachments/assets/5b416e59-2fa5-4a38-b674-eeacb5803569" />
+<img width="531" height="684" alt="Image" src="https://github.com/user-attachments/assets/332a331b-2e56-489e-826d-2120da71b33d" />
+
+
+
