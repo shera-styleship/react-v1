@@ -7,7 +7,8 @@
       "userName": "홍길동",
       "userImage": "/images/profile01.jpg",
       "userPhone": "010-0000-0000",
-      "userCompany": "NEPA"
+      "userCompany": "NEPA",
+      "jobTitle": "과장"
     },
     {
       "id": 1,
@@ -16,16 +17,18 @@
       "userName": "강아지",
       "userImage": "/images/profile02.jpg",
       "userPhone": "010-0000-0000",
-      "userCompany": "STYLESHIP"
+      "userCompany": "STYLESHIP",
+      "jobTitle": "사원"
     },
     {
-      "id": 3,
+      "id": 2,
       "userId": "test03",
       "userPassword": "0000",
       "userName": "임꺽정",
       "userImage": "/images/profile03.jpg",
       "userPhone": "010-0000-0000",
-      "userCompany": "FILA"
+      "userCompany": "FILA",
+      "jobTitle": "대리"
     }
   ],
   "projectList": [
@@ -35,6 +38,7 @@
       "projectNo": 0,
       "projectDate": "2025-08-06",
       "projectBrand": "NEPA",
+      "projectSort": "외부몰",
       "projectTitle": "○ [키즈] WINTER VACANCE 다운 프리오더 (8/13~9/21)",
       "projectStatus": "완료요청"
     },
@@ -44,6 +48,7 @@
       "projectNo": 1,
       "projectDate": "2025-09-06",
       "projectBrand": "NEPA",
+      "projectSort": "이벤트",
       "projectTitle": "9월 로그데이터",
       "projectStatus": "진행"
     },
@@ -53,6 +58,7 @@
       "projectNo": 2,
       "projectDate": "2025-09-16",
       "projectBrand": "FILA",
+      "projectSort": "프로모션",
       "projectTitle": "무아몽 25FW 등록",
       "projectStatus": "접수"
     },
@@ -62,6 +68,7 @@
       "projectNo": 3,
       "projectDate": "2025-10-01",
       "projectBrand": "NEPA",
+      "projectSort": "기획전",
       "projectTitle": "[클럽] 배틀레디2 다크니스 프로모션 파일 송부 요청",
       "projectStatus": "진행"
     }

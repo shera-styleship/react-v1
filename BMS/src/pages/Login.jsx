@@ -1,4 +1,4 @@
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Input from "../components/form/Input";
 import Button from "../components/form/Button";
@@ -6,58 +6,69 @@ import Alert from "../components/layer/Alert";
 import { UserDataContext } from "../App";
 import { UserDispatchContext } from "../App";
 
+const STORAGE_KEY = "remembered_username"; // 로컬스토리지 키
+
 const Login = () => {
   const nav = useNavigate();
   const [loginId, setLoginId] = useState("");
   const [loginPw, setLoginPw] = useState("");
+  const [rememberId, setRememberId] = useState(false); // 체크박스 상태
   const { userData, handleAlertBtn } = useContext(UserDataContext);
   const { login } = useContext(UserDispatchContext);
-
   const [error, setError] = useState("");
+
+  // 첫 로드 시 저장된 아이디 복원
+  useEffect(() => {
+    const saved = localStorage.getItem(STORAGE_KEY);
+    if (saved) {
+      setLoginId(saved);
+      setRememberId(true);
+    }
+  }, []);
 
   const openAlert = (content) => {
     setError(content);
     handleAlertBtn();
   };
+
   const handleLogin = () => {
-    // 입력된 아이디 양끝 공백 제거
     const id = loginId.trim();
-    // 입력된 비밀번호 양끝 공백 제거
     const pw = loginPw.trim();
 
-    if (!id || !pw) {
-      // 아이디/비밀번호 둘 중 하나라도 비면 사용자에게 알림
+    if (!id && !pw) {
       openAlert("아이디와 비밀번호를 입력하세요.");
-      // 더 진행하지 않고 함수 종료(조기 반환)
+      return;
+    }
+    if (!id) {
+      openAlert("아이디를 입력하세요.");
+      return;
+    }
+    if (!pw) {
+      openAlert("비밀번호를 입력하세요.");
       return;
     }
 
     // 아이디가 일치하는 사용자 찾기(없으면 undefined)
-    const user = userData.find((u) => u.userId === id);
-
+    const user = userData.find((u) => String(u.userId) === String(id));
     if (!user) {
-      // 해당 아이디의 사용자가 없으면 알리고 리턴
       openAlert("해당 아이디가 존재하지 않습니다.");
       return;
     }
-
     if (user.userPassword !== pw) {
-      // 비밀번호가 저장된 것과 다르면 알리고 리턴
       openAlert("비밀번호가 일치하지 않습니다.");
       return;
     }
 
-    if (login) {
-      // 전역 로그인을 위해 login함수 실행
-      login(user.id);
-    }
+    // 여기서 아이디 저장/삭제 처리
+    if (rememberId) localStorage.setItem(STORAGE_KEY, id);
+    else localStorage.removeItem(STORAGE_KEY);
 
+    if (login) {
+      login(user.id); // 전역 로그인
+    }
     nav("/"); // 홈으로 이동
   };
 
-  // const handleJoin = () => {
-  // 	nav('/join');
-  // };
   return (
     <>
       <div className="Login_wrap">
@@ -70,8 +81,8 @@ const Login = () => {
           <div className="Login_form">
             <form
               onSubmit={(e) => {
-                e.preventDefault(); // 새로고침 막기
-                handleLogin(); // 기존 함수 실행
+                e.preventDefault();
+                handleLogin();
               }}
             >
               <Input
@@ -79,6 +90,8 @@ const Login = () => {
                 inputValue={loginId}
                 setValue={setLoginId}
                 inputChar="login"
+                // 가능하면 내부 input에 전달되도록 자동완성 힌트도 추가
+                // autoComplete="username"
               />
               <Input
                 inputType="password"
@@ -87,24 +100,29 @@ const Login = () => {
                 setValue={setLoginPw}
                 inputChar="login"
                 toggleVisibility
+                // autoComplete="current-password"
               />
+
+              {/* 아이디 저장 체크박스 */}
               <label className="Login_id_remember">
-                <input type="checkbox" />
+                <input
+                  type="checkbox"
+                  checked={rememberId}
+                  onChange={(e) => setRememberId(e.target.checked)}
+                />
                 <span className="Login_id_remember_checkbox"></span>
                 아이디 저장
               </label>
 
-              {/* 로그인 버튼은 type="submit"으로 변경 */}
+              {/* 로그인 버튼은 type="submit" */}
               <Button btnType="submit" btnSize="big" btnChar="orange">
                 로그인
               </Button>
             </form>
           </div>
-          {/* <Button onClick={handleJoin} btnSize='big' btnChar='white'>
-						회원가입
-					</Button> */}
         </div>
       </div>
+
       <Alert title="알림" alertType={false}>
         {error}
       </Alert>
