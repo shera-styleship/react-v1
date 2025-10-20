@@ -1,12 +1,22 @@
 import { NavLink } from "react-router-dom";
+import { useState, useContext } from "react";
 import LogoStyleship from "/images/common/logo_styleship.png";
+import NewProject from "../form/NewProject";
+import { UserDataContext } from "../../App";
 
 function Lnb() {
+  const [showNewProject, setShowNewProject] = useState(false);
+  const { alertState, handleAlertBtn } = useContext(UserDataContext);
+
   return (
     <nav className="Lnb">
       <ul className="button-list">
         <li className="project-write">
-          <button>
+          <button onClick={() => {
+              setShowNewProject(true);
+              handleAlertBtn(); 
+            }}
+          >
             <span className="button-icon icon-pencil"></span>
             <span className="button-name">프로젝트 생성</span>
           </button>
@@ -76,6 +86,16 @@ function Lnb() {
           <img src={LogoStyleship} alt="logo" />
         </NavLink>
       </div>
+
+
+      {showNewProject && alertState === "on" && (
+        <NewProject
+          onClose={() => {
+            setShowNewProject(false);
+            handleAlertBtn(); // 닫을 때도 상태 초기화
+          }}
+        />
+      )}
     </nav>
   );
 }

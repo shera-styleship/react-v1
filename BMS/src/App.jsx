@@ -42,6 +42,10 @@ function App() {
   const [auth, setAuth] = useState({ isLoggedIn: false, userId: null });
   const [alertState, setAlertState] = useState("");
 
+  // 프로젝트 갱신 관련 상태
+  const [projectRefresh, setProjectRefresh] = useState(false);
+  const refreshProjects = () => setProjectRefresh((prev) => !prev);
+
   const handleAlertBtn = () =>
     setAlertState((prev) => (prev === "on" ? "" : "on"));
 
@@ -71,6 +75,8 @@ function App() {
         auth,
         alertState,
         handleAlertBtn,
+        projectRefresh,
+        refreshProjects,
       }}
     >
       <UserDispatchContext.Provider value={{ login, logout }}>
@@ -88,6 +94,7 @@ function App() {
               <Route index element={<Home />} />
               <Route path="/" element={<Home />} />
               <Route path="/Project" element={<Project />} />
+              <Route path="/Project/:projectNo" element={<Project />} />      
               <Route path="/MyProject" element={<MyProject />} />
               <Route path="/Schedule" element={<Schedule />} />
               <Route path="/Knowledge" element={<Knowledge />} />

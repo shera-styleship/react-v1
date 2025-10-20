@@ -684,6 +684,12 @@ li:hover .arrow-right:before {
 	scrollbar-width: none;	
 }
 .item__list::-webkit-scrollbar {display: none;}
+.item__list .no-txt {
+  font-weight: 300;
+  font-size: 14px;
+  color: rgb(51, 51, 51);
+  text-align: center;
+}
 .ProjectItem {
   display: flex;
   justify-content: space-between;
@@ -861,6 +867,7 @@ li:hover .arrow-right:before {
   font-size: 16px;
   line-height: 28px;
   color: rgb(51, 51, 51);
+  word-break: break-all;
 }
 
 .ProjectView .project-control {
@@ -924,6 +931,7 @@ li:hover .arrow-right:before {
   box-sizing: border-box;
   overflow-y: scroll;
 }
+.CommentTask .comment-list > div + div {margin-top: 12px;}
 .CommentTask .comment-list::-webkit-scrollbar {
   width: 2px;
 }
@@ -997,19 +1005,20 @@ li:hover .arrow-right:before {
   font-size: 14px;
   color: rgb(51, 51, 51);
 }
-.CommentTask .comment .msg .comment-option {
+.CommentTask .comment-option {
   display: flex;
   flex-direction: column;
   position: absolute;
   right: 0;
   top: calc(100% + 6px);
+  width: 115px;
   padding: 7px 16px;
   border-radius: 10px;
   background-color: rgb(255, 255, 255);
   box-shadow: 0 3px 10px rgba(0, 0, 0, .1);
   z-index: 1;
 }
-.CommentTask .comment .msg .comment-option button {
+.CommentTask .comment-option button {
   padding: 9px 0;
   font-weight: 300;
   font-size: 12px;

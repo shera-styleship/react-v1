@@ -2,57 +2,67 @@ import { useState } from "react";
 import Select from "../form/Select";
 import Input from "../form/Input";
 
-const ProjectFilterBar = ()=>{
-    const [filters, setFilters] = useState({
-        company: "",
-        brand: "",
-        team: "",
-        keyword: "",
-    });
+const ProjectFilterBar = ({ filters, setFilters, onFilter })=>{
 
     const handleSelect = (e) => {
+        const { name, value } = e.target;
+        const newFilters = { ...filters, [name]: value };
+        setFilters(newFilters);
+        onFilter(newFilters);
+    };
+
+    const handleKeywordSearch  = () => {
+        onFilter(filters);
+    };
+
+    const handleKeyPress = (e) => {
+        if (e.key === "Enter") handleKeywordSearch ();
+    };
+
+    const handleStatus = (type) => {
+        const newFilters = { ...filters, status: type };
+        setFilters(newFilters);
+        onFilter(newFilters);
+    };
+
+    const handleDateChange = (e) => {
         const { name, value } = e.target;
         setFilters((prev) => ({ ...prev, [name]: value }));
     };
 
-    const handleSearch = () => {
-        console.log("검색 실행:", filters.keyword);
-    }
-    const handleKeyPress = (e) => {
-        if (e.key === "Enter") {
-            handleSearch();
-        }
-    }
+    // 날짜 필터는 조회 버튼 눌러야 반영
+    const handleDateSearch = () => {
+        onFilter(filters, true);
+    };
 
     const selectOptions = [
         {
-            name: "company",
-            options: [
-                { value: "", label: "Company" },
-                { value: "all", label: "All" },
-                { value: "lotte", label: "롯데홈쇼핑" },
-                { value: "columbia", label: "컬럼비아" },
-            ],
+        name: "company",
+        options: [
+            { value: "", label: "Company" },
+            { value: "all", label: "All" },
+            { value: "NPLUS(네파)", label: "NPLUS(네파)" },
+            { value: "미스토코리아(주)", label: "미스토코리아(주)" },
+        ],
         },
         {
-            name: "brand",
-            options: [
-                { value: "", label: "Brand" },
-                { value: "all", label: "All" },
-                { value: "goldengoose", label: "골든구스" },
-                { value: "columbia", label: "컬럼비아" },
-
-            ],
+        name: "brand",
+        options: [
+            { value: "", label: "Brand" },
+            { value: "all", label: "All" },
+            { value: "NEPA", label: "NEPA" },
+            { value: "FILA", label: "FILA" },
+        ],
         },
         {
-            name: "team",
-            options: [
-                { value: "", label: "All" },
-                { value: "cr", label: "CR" },
-                { value: "dv", label: "DV" },
-                { value: "uxi", label: "UXI" },
-                { value: "sr", label: "SR" }
-            ],
+        name: "team",
+        options: [
+            { value: "", label: "All" },
+            { value: "cr", label: "CR" },
+            { value: "dv", label: "DV" },
+            { value: "uxi", label: "UXI" },
+            { value: "sr", label: "SR" },
+        ],
         },
     ];
 
@@ -77,20 +87,48 @@ const ProjectFilterBar = ()=>{
                         setValue={(val) => setFilters((prev)=>({ ...prev, keyword : val }))}
                         onKeyDown = {handleKeyPress}
                     />
-                    <button type="button" className="pj-search__btn" onClick={handleSearch}></button>
+                    <button type="button" className="pj-search__btn" onClick={handleKeywordSearch }></button>
                 </div>
             </div>
             
             <div className="">
                 <div className="status-box">
-                    <button type="button" className="on">접수/진행 프로젝트</button>
-                    <button type="button">완료/취소 프로젝트</button>
+                    <button
+                        type="button"
+                        className={filters.status === "active" ? "on" : ""}
+                        onClick={() => handleStatus("active")}
+                    >
+                        접수/진행 프로젝트
+                    </button>
+                    <button
+                        type="button"
+                        className={filters.status === "done" ? "on" : ""}
+                        onClick={() => handleStatus("done")}
+                    >
+                        완료/취소 프로젝트
+                    </button>
                 </div>
                 <div className="date-box">
-                    <input type="date" name="" id="" />
+                    <input
+                        type="date"
+                        name="startDate"
+                        value={filters.startDate}
+                        onChange={handleDateChange}
+                    />
                     ~
-                    <input type="date" name="" id="" />
-                    <button type="button" className="pj-date__btn">조회</button>
+                    <input
+                        type="date"
+                        name="endDate"
+                        value={filters.endDate}
+                        onChange={handleDateChange}
+                    />
+                    <button
+                        type="button"
+                        className="pj-date__btn"
+                        onClick={handleDateSearch}
+                    >
+                        조회
+                    </button>
                 </div>
             </div>
         </div>

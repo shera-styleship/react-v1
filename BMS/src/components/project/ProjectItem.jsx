@@ -1,35 +1,40 @@
 import Select from "../form/Select";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import {PROJECT_STATUS_OPTIONS} from "../../constants/projectStatus"
 
-const ProjectItem = ()=>{
+const ProjectItem = ({ project, onClick, onBrandClick })=>{
     const [status, setStatus] = useState("receipt");
 
-    const statusOptions = [
-        { value: "receipt", label: "접수" },
-        { value: "progress", label: "진행" },
-        { value: "hold", label: "보류요청" },
-        { value: "completion", label: "완료요청" },
-        { value: "cancel", label: "취소" }
-    ];
+    useEffect(() => {
+        setStatus(project.projectStatus || "receipt");
+    }, [project]);
 
     const handleStatusChange = (e) => {
-        setStatus(e.target.value);
-    };   
+        const newStatus = e.target.value;
+        setStatus(newStatus);
+
+        // ✅ 선택 시 DB에 반영하고 싶다면 여기에 fetch/axios로 PATCH 요청 추가 가능
+        // fetch(`http://localhost:4000/projectList/${project.id}`, {
+        //   method: "PATCH",
+        //   headers: { "Content-Type": "application/json" },
+        //   body: JSON.stringify({ projectStatus: newStatus }),
+        // });
+    }; 
 
     return (
-        <div className="ProjectItem">
-            <p className="date">10-10</p>
-            <p className="number">84739</p>
-            <p className="brand">APTE</p>
-            <p className="type">기획전</p> 
-            <p className="title">
-                ○ [키즈] WINTER VACANCE 다운 프리오더 (8/13~9/21)
-                <span class="tag">CR</span> <span className="tag">@</span> <span className="tag new">N</span>
+        <div className="ProjectItem" >
+            <p className="date">{project.projectDate?.slice(5)}</p>
+            <p className="number">{project.projectNo}</p>
+            <p className="brand" onClick={onBrandClick}>{project.projectBrand}</p>
+            <p className="type">{project.projectSort}</p> 
+            <p className="title" onClick={onClick}>
+                {project.projectTitle}
+                <span className="tag">{project.projectTeam}</span> <span className="tag">@</span> <span className="tag new">N</span>
             </p>
             <Select 
                 name="status"
                 value={status}
-                options={statusOptions}
+                options={PROJECT_STATUS_OPTIONS}
                 onChange={handleStatusChange}
                 className={`_status _${status}`}
             />
