@@ -91,8 +91,8 @@ function App() {
           {/* 로그인 필요: 메인 앱 */}
           <Route element={<RequireAuth />}>
             <Route element={<AppLayout />}>
-              <Route index element={<Home />} />
-              <Route path="/" element={<Home />} />
+              <Route index element={<Project />} />
+              <Route path="/" element={<Project />} />
               <Route path="/Project" element={<Project />} />
               <Route path="/Project/:projectNo" element={<Project />} />      
               <Route path="/MyProject" element={<MyProject />} />
