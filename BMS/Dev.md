@@ -17,22 +17,24 @@
 ```plaintext
 src/
  ├── components/
- │    ├── common/        # 공용 컴포넌트 (Button, Modal, Input 등)
- │    ├── layout/        # 페이지 레이아웃 구성 요소 (Header, Footer 등)
- │    └── feature/       # 기능 단위 컴포넌트 (Login, Signup, Profile 등)
+ │    ├── common/        # 공용 컴포넌트 (Button, Input 등)
+ │    ├── layout/        # 페이지 레이아웃 구성 요소 (Header, Lnb 등)
+ │    ├── feature/       # 기능 단위 컴포넌트 (ProjectList, ProjectView 등)
+ │    └── network        # IP 관리
  │
- ├── hooks/              # 커스텀 훅 (useForm, useFetch 등)
- ├── pages/              # 라우트 페이지 컴포넌트
- ├── utils/              # 헬퍼함수 및 유틸리티 모듈
- ├── assets/             # 이미지, 아이콘, 폰트
+ ├── layouts/            # 페이지 분기점 
+ ├── pages/              # 라우트 페이지 컴포넌트 
+ ├── hooks/              # 커스텀 훅
+ ├── utils/              # 유틸 함수, 상수, API
+ ├── assets/             # 이미지, 아이콘, 스타일
 ```
 
 ### 컴포넌트/모듈 분리 기준
 
 | 구분        | 설명                           | 예시                                 |
 | ----------- | ------------------------------ | ------------------------------------ |
-| **Common**  | 공통 UI 요소, 상태 없음        | `Button`, `Input`, `Badge`           |
-| **Feature** | 특정 기능 담당, 내부 상태 포함 | `LoginForm`, `SignupForm`, `List`    |
-| **Layout**  | 페이지 공통 구조               | `Header`, `Sidebar`, `MainContainer` |
-| **Hooks**   | 로직 재사용을 위한 커스텀 훅   | `useInput`, `useModal`, `useAuth`    |
-| **Utils**   | 순수 함수, API 모듈, 포맷터    | `formatDate`, `apiClient`            |
+| **Common**  | 공통 UI 요소        | `Alert`, `Button`, `Input`, `Select`           |
+| **Layout**  | 페이지 공통 구조               | `Header`, `Lnb` |
+| **Feature** | 특정 기능 담당, 내부 상태 포함 | `ProjectList`, `ProjectView`, `ProjectFilterBar`, `ProjectItem`, `NewProject`    |
+| **Utils**   | 순수 함수, API 모듈, 포맷터    | `constants`, `getUserImageSrc`            |
+| **Hooks**   | 로직 재사용을 위한 커스텀 훅   |     |
