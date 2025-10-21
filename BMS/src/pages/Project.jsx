@@ -5,6 +5,11 @@ import { UserDataContext } from "../App";
 import ProjectList from "../components/feature/ProjectList";
 import ProjectView from "../components/feature/ProjectView";
 
+// (파일 상단)
+const API_BASE = import.meta.env.PROD
+  ? "https://my-json-server.typicode.com/kjssong/mock-api"
+  : "http://localhost:4000";
+
 const Project = () => {
   const { projectRefresh } = useContext(UserDataContext); // ✅ Context로부터 신호 감지
   const { projectNo } = useParams();
@@ -16,7 +21,7 @@ const Project = () => {
 
   const fetchProjects = async () => {
     try {
-      const res = await fetch("http://localhost:4000/projectList");
+      const res = await fetch(`${API_BASE}/projectList`);
       const data = await res.json();
       setProjects(data);
     } catch (err) {
