@@ -1,4 +1,4 @@
-## API
+## API Setting
 읽기만 가능
 
 **
