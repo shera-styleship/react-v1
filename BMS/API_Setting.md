@@ -1,7 +1,7 @@
 ## API Setting
 읽기만 가능
 
-**
+
 **1. Json을 불러오던 컴포넌트 파일을 열어 import 아래에 내용 추가**
 
 https://my-json-server.typicode.com/<깃허브ID>/<레포이름>
