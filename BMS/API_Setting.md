@@ -26,4 +26,5 @@ https://my-json-server.typicode.com/<깃허브ID>/<레포이름>
 **깃허브에 json 추가**
 
 공개 레포를 mock-api 로 생성
+
 생성 후 mock-api 안에 db.json 파일 추가
