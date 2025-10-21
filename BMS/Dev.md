@@ -45,16 +45,16 @@ src/
 | 📁 폴더 | 🧩 파일명 | 📝 설명 |
 |:--|:--|:--|
 | **components/common/** | `Button.jsx` | 기본 버튼 컴포넌트 |
-|  | `Input.jsx` | 공통 인풋 필드 |
-|  | `Select.jsx` | 커스텀 셀렉트 박스 |
-|  | `Alert.jsx` | 알림/확인 팝업 레이어 |
+|  | `Input.jsx` | 기본 인풋 컴포넌트 |
+|  | `Select.jsx` | 커스텀 셀렉트 컴포넌트|
+|  | `Alert.jsx` | 알림/확인 레이어 컴포넌트 |
 | **components/layout/** | `Header.jsx` | 상단 헤더 |
 |  | `Lnb.jsx` | 좌측 내비게이션 |
 | **components/feature/** | `NewProject.jsx` | 새 프로젝트 등록 컴포넌트 |
 |  | `ProjectList.jsx` | 프로젝트 리스트 렌더링 컴포넌트 |
 |  | `ProjectFilterBar.jsx` | 프로젝트 리스트 내 필터링 기능 |
 |  | `ProjectItem.jsx` | 프로젝트 리스트 내 아이템 렌더링 |
-|  | `ProjectView.jsx` | 새 프로젝트 생성 또는 아이템 클릭 시 렌더링되는 프로젝트 상세 |
+|  | `ProjectView.jsx` | 새프로젝트 생성/아이템 클릭 시 렌더링되는 프로젝트 상세 |
 | **layouts/** | `AuthLayout.jsx` | 로그인 레이아웃 |
 |  | `AppLayout.jsx` | 로그인 이후 공통 레이아웃 (Header, Lnb 포함) |
 | **pages/** | `Login.jsx` | 로그인 페이지 |
