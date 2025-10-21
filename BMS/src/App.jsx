@@ -14,6 +14,11 @@ import Hr from "./pages/Hr";
 import Setting from "./pages/Setting";
 import Login from "./pages/Login";
 
+// (파일 상단)
+const API_BASE = import.meta.env.PROD
+  ? "https://my-json-server.typicode.com/kjssong/mock-api"
+  : "http://localhost:4000";
+
 // 컨텍스트
 export const UserDataContext = createContext();
 export const UserDispatchContext = createContext();
@@ -49,11 +54,11 @@ function App() {
   const handleAlertBtn = () =>
     setAlertState((prev) => (prev === "on" ? "" : "on"));
 
-  // 서버 데이터 하이드레이트
+  // (기존 useEffect 내부)
   useEffect(() => {
     (async () => {
       try {
-        const res = await fetch("http://localhost:4000/userInfo");
+        const res = await fetch(`${API_BASE}/userInfo`);
         if (!res.ok) throw new Error("Failed to load users");
         const list = await res.json();
         setUserData(list);
@@ -94,7 +99,7 @@ function App() {
               <Route index element={<Project />} />
               <Route path="/" element={<Project />} />
               <Route path="/Project" element={<Project />} />
-              <Route path="/Project/:projectNo" element={<Project />} />      
+              <Route path="/Project/:projectNo" element={<Project />} />
               <Route path="/MyProject" element={<MyProject />} />
               <Route path="/Schedule" element={<Schedule />} />
               <Route path="/Knowledge" element={<Knowledge />} />
