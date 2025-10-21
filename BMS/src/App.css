@@ -275,57 +275,57 @@
 }
 
 .icon-pencil {
-  background-image: url(/images/icon/ico_pencil.svg);
+  background-image: url(../src/assets/images/icon/ico_pencil.svg);
   background-size: 16px;
 }
 .icon-project {
-  background-image: url(/images/icon/ico_project.svg);
+  background-image: url(../src/assets/images/icon/ico_project.svg);
   background-size: 16px;
 }
 .icon-myProject {
-  background-image: url(/images/icon/ico_myProject.svg);
+  background-image: url(../src/assets/images/icon/ico_myProject.svg);
   background-size: 16px;
 }
 .icon-schedule {
-  background-image: url(/images/icon/ico_schedule.svg);
+  background-image: url(../src/assets/images/icon/ico_schedule.svg);
   background-size: 15.5px;
 }
 .icon-knowledge {
-  background-image: url(/images/icon/ico_knowledge.svg);
+  background-image: url(../src/assets/images/icon/ico_knowledge.svg);
   background-size: 19px;
 }
 .icon-hr {
-  background-image: url(/images/icon/ico_hr.svg);
+  background-image: url(../src/assets/images/icon/ico_hr.svg);
   background-size: 16px;
 }
 .icon-setting {
-  background-image: url(/images/icon/ico_setting.svg);
+  background-image: url(../src/assets/images/icon/ico_setting.svg);
   background-size: 16px;
 }
 
 li:hover .icon-project,
 .lnb-on .icon-project {
-  background-image: url(/images/icon/ico_project_on.svg);
+  background-image: url(../src/assets/images/icon/ico_project_on.svg);
 }
 li:hover .icon-myProject,
 .lnb-on .icon-myProject {
-  background-image: url(/images/icon/ico_myProject_on.svg);
+  background-image: url(../src/assets/images/icon/ico_myProject_on.svg);
 }
 li:hover .icon-schedule,
 .lnb-on .icon-schedule {
-  background-image: url(/images/icon/ico_schedule_on.svg);
+  background-image: url(../src/assets/images/icon/ico_schedule_on.svg);
 }
 li:hover .icon-knowledge,
 .lnb-on .icon-knowledge {
-  background-image: url(/images/icon/ico_knowledge_on.svg);
+  background-image: url(../src/assets/images/icon/ico_knowledge_on.svg);
 }
 li:hover .icon-hr,
 .lnb-on .icon-hr {
-  background-image: url(/images/icon/ico_hr_on.svg);
+  background-image: url(../src/assets/images/icon/ico_hr_on.svg);
 }
 li:hover .icon-setting,
 .lnb-on .icon-setting {
-  background-image: url(/images/icon/ico_setting_on.svg);
+  background-image: url(../src/assets/images/icon/ico_setting_on.svg);
 }
 
 .arrow-right {
@@ -504,7 +504,7 @@ li:hover .arrow-right:before {
   left: 50%;
   width: 9px;
   height: 6px;
-  background: url(/images/checkbox.svg) 50% 50% / cover;
+  background: url(/assets/images/icon/checkbox.svg) 50% 50% / cover;
   content: "";
   transform: translate(-50%, -50%);
 }

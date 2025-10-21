@@ -1,7 +1,7 @@
 import { NavLink } from "react-router-dom";
 import { useState, useContext } from "react";
-import LogoStyleship from "/images/common/logo_styleship.png";
-import NewProject from "../form/NewProject";
+import LogoStyleship from "../../assets/images/common/logo_styleship.png";
+import NewProject from "../feature/NewProject";
 import { UserDataContext } from "../../App";
 
 function Lnb() {

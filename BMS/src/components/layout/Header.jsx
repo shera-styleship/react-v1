@@ -2,7 +2,7 @@ import { useContext, useMemo, useState } from "react";
 import { UserDataContext } from "../../App";
 import { UserDispatchContext } from "../../App";
 import PublicIP from "../network/PublicIP";
-import { getUserImageSrc } from "../../util/getUserImageSrc";
+import { getUserImageSrc } from "../../utils/getUserImageSrc";
 
 function Header({ attendanceToggle, onAttendanceToggle, onLnbToggle }) {
   const { userData = [], auth = { isLoggedIn: false, userId: null } } =

@@ -2,8 +2,8 @@
 import { useParams, useNavigate } from "react-router-dom";
 import { useState, useEffect, useContext } from "react";
 import { UserDataContext } from "../App";
-import ProjectList from "../components/project/ProjectList";
-import ProjectView from "../components/project/ProjectView";
+import ProjectList from "../components/feature/ProjectList";
+import ProjectView from "../components/feature/ProjectView";
 
 const Project = () => {
   const { projectRefresh } = useContext(UserDataContext); // ✅ Context로부터 신호 감지
