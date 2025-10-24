@@ -27,7 +27,9 @@
 https://vercel.com/home
 
 > Dashboard 에 들어가 생성된 프로젝트 확인
-> 
+
+> BMS - https://bms-blush-six.vercel.app/
+
 <img width="1544" height="921" alt="Image" src="https://github.com/user-attachments/assets/c24f9b9d-d86a-488a-8747-75953502ecb3" />
 
 <img width="1862" height="891" alt="Image" src="https://github.com/user-attachments/assets/b1a87407-77d9-4f96-8470-53c565ef8d07" />
