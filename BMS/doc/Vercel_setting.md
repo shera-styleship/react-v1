@@ -1,6 +1,7 @@
 ##  Vercel 배포
 
-> 배포전 npm run build (리액트 빌드) 굳이 안해도 됨. 
+> 배포전 npm run build (리액트 빌드) 굳이 안해도 됨.
+
 > vercel 에서 프로젝트 감지하고 자동으로 빌드
 
 1.  전역 설치
