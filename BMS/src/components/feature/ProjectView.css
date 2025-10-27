@@ -27,7 +27,7 @@
   background-size: contain;
   background-position: center;
   background-repeat: no-repeat;
-  background-image: url(/images/icon/ico_project_view.svg);
+  background-image: url(@/assets/images/icon/ico_project_view.svg);
 }
 .ProjectView p {
   margin: 0;
@@ -169,3 +169,4 @@
   overflow: hidden;
 }
 /* //Project View */
+
