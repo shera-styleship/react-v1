@@ -275,15 +275,15 @@
 }
 
 .icon-pencil {
-  background-image: url(../src/assets/images/icon/ico_pencil.svg);
+  background-image: url(@/assets/images/icon/ico_pencil.svg);
   background-size: 16px;
 }
 .icon-project {
-  background-image: url(../src/assets/images/icon/ico_project.svg);
+  background-image: url(@/assets/images/icon/ico_project.svg);
   background-size: 16px;
 }
 .icon-myProject {
-  background-image: url(../src/assets/images/icon/ico_myProject.svg);
+  background-image: url(@/assets/images/icon/ico_myProject.svg);
   background-size: 16px;
 }
 .icon-schedule {
@@ -291,41 +291,41 @@
   background-size: 15.5px;
 }
 .icon-knowledge {
-  background-image: url(../src/assets/images/icon/ico_knowledge.svg);
+  background-image: url(@/assets/images/icon/ico_knowledge.svg);
   background-size: 19px;
 }
 .icon-hr {
-  background-image: url(../src/assets/images/icon/ico_hr.svg);
+  background-image: url(@/assets/images/icon/ico_hr.svg);
   background-size: 16px;
 }
 .icon-setting {
-  background-image: url(../src/assets/images/icon/ico_setting.svg);
+  background-image: url(@/assets/images/icon/ico_setting.svg);
   background-size: 16px;
 }
 
 li:hover .icon-project,
 .lnb-on .icon-project {
-  background-image: url(../src/assets/images/icon/ico_project_on.svg);
+  background-image: url(@/assets/images/icon/ico_project_on.svg);
 }
 li:hover .icon-myProject,
 .lnb-on .icon-myProject {
-  background-image: url(../src/assets/images/icon/ico_myProject_on.svg);
+  background-image: url(@/assets/images/icon/ico_myProject_on.svg);
 }
 li:hover .icon-schedule,
 .lnb-on .icon-schedule {
-  background-image: url(../src/assets/images/icon/ico_schedule_on.svg);
+  background-image: url(@/assets/images/icon/ico_schedule_on.svg);
 }
 li:hover .icon-knowledge,
 .lnb-on .icon-knowledge {
-  background-image: url(../src/assets/images/icon/ico_knowledge_on.svg);
+  background-image: url(@/assets/images/icon/ico_knowledge_on.svg);
 }
 li:hover .icon-hr,
 .lnb-on .icon-hr {
-  background-image: url(../src/assets/images/icon/ico_hr_on.svg);
+  background-image: url(@/assets/images/icon/ico_hr_on.svg);
 }
 li:hover .icon-setting,
 .lnb-on .icon-setting {
-  background-image: url(../src/assets/images/icon/ico_setting_on.svg);
+  background-image: url(@/assets/images/icon/ico_setting_on.svg);
 }
 
 .arrow-right {
@@ -504,14 +504,16 @@ li:hover .arrow-right:before {
   left: 50%;
   width: 9px;
   height: 6px;
-  background: url(/assets/images/icon/checkbox.svg) 50% 50% / cover;
+  background: url(@/assets/images/icon/checkbox.svg) 50% 50% / cover;
   content: "";
   transform: translate(-50%, -50%);
 }
 /* //Login */
 
 /* Project List */
-.Project {height: 100%;}
+.Project {
+  height: 100%;
+}
 .project-wrap {
   display: flex;
   height: 100%;
@@ -535,7 +537,9 @@ li:hover .arrow-right:before {
   display: flex;
   justify-content: space-between;
 }
-.ProjectFilterBar > div + div {margin-top: 24px;}
+.ProjectFilterBar > div + div {
+  margin-top: 24px;
+}
 .ProjectFilterBar .select-box {
   display: flex;
   align-items: center;
@@ -549,7 +553,9 @@ li:hover .arrow-right:before {
   width: 100%;
   max-width: 183px;
 }
-.ProjectFilterBar .select-box .CustomSelect._team {max-width: 85px;}
+.ProjectFilterBar .select-box .CustomSelect._team {
+  max-width: 85px;
+}
 .ProjectFilterBar .input-box {
   position: relative;
   display: flex;
@@ -557,7 +563,9 @@ li:hover .arrow-right:before {
   flex-grow: 1;
   margin-left: 12px;
 }
-.ProjectFilterBar .input-box .input_label_wrap {width: 100%;}
+.ProjectFilterBar .input-box .input_label_wrap {
+  width: 100%;
+}
 .ProjectFilterBar .input-box input {
   display: block;
   width: 100%;
@@ -610,8 +618,13 @@ li:hover .arrow-right:before {
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='15' viewBox='0 0 14 15'%3E%3Cg id='그룹_272' data-name='그룹 272' transform='translate(-1446 -541)'%3E%3Cg id='사각형_245' data-name='사각형 245' transform='translate(1447 545)' fill='none' stroke='%23999' stroke-width='1'%3E%3Crect width='12' height='1' stroke='none'/%3E%3Crect x='0.5' y='0.5' width='11' fill='none'/%3E%3C/g%3E%3Cg id='사각형_252' data-name='사각형 252' transform='translate(1446 542)' fill='none' stroke='%23999' stroke-width='1'%3E%3Crect width='14' height='14' rx='2' stroke='none'/%3E%3Crect x='0.5' y='0.5' width='13' height='13' rx='1.5' fill='none'/%3E%3C/g%3E%3Cg id='사각형_246' data-name='사각형 246' transform='translate(1449 548)' fill='none' stroke='%23999' stroke-width='1'%3E%3Crect width='2' height='2' stroke='none'/%3E%3Crect x='0.5' y='0.5' width='1' height='1' fill='none'/%3E%3C/g%3E%3Cg id='사각형_253' data-name='사각형 253' transform='translate(1449 541)' fill='none' stroke='%23999' stroke-width='1'%3E%3Crect width='2' height='3' stroke='none'/%3E%3Crect x='0.5' y='0.5' width='1' height='2' fill='none'/%3E%3C/g%3E%3Cg id='사각형_254' data-name='사각형 254' transform='translate(1455 541)' fill='none' stroke='%23999' stroke-width='1'%3E%3Crect width='2' height='3' stroke='none'/%3E%3Crect x='0.5' y='0.5' width='1' height='2' fill='none'/%3E%3C/g%3E%3Cg id='사각형_249' data-name='사각형 249' transform='translate(1449 551)' fill='none' stroke='%23999' stroke-width='1'%3E%3Crect width='2' height='2' stroke='none'/%3E%3Crect x='0.5' y='0.5' width='1' height='1' fill='none'/%3E%3C/g%3E%3Cg id='사각형_247' data-name='사각형 247' transform='translate(1452 548)' fill='none' stroke='%23999' stroke-width='1'%3E%3Crect width='2' height='2' stroke='none'/%3E%3Crect x='0.5' y='0.5' width='1' height='1' fill='none'/%3E%3C/g%3E%3Cg id='사각형_250' data-name='사각형 250' transform='translate(1452 551)' fill='none' stroke='%23999' stroke-width='1'%3E%3Crect width='2' height='2' stroke='none'/%3E%3Crect x='0.5' y='0.5' width='1' height='1' fill='none'/%3E%3C/g%3E%3Cg id='사각형_248' data-name='사각형 248' transform='translate(1455 548)' fill='none' stroke='%23999' stroke-width='1'%3E%3Crect width='2' height='2' stroke='none'/%3E%3Crect x='0.5' y='0.5' width='1' height='1' fill='none'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E%0A");
   outline: none;
 }
-.ProjectFilterBar .date-box input[type="date"]::-webkit-calendar-picker-indicator,
-.ProjectFilterBar .date-box input[type="date"]::-webkit-inner-spin-button { opacity: 0; appearance: none; }
+.ProjectFilterBar
+  .date-box
+  input[type="date"]::-webkit-calendar-picker-indicator,
+.ProjectFilterBar .date-box input[type="date"]::-webkit-inner-spin-button {
+  opacity: 0;
+  appearance: none;
+}
 .ProjectFilterBar .date-box .pj-date__btn {
   width: 65px;
   height: 34px;
@@ -624,11 +637,15 @@ li:hover .arrow-right:before {
 }
 
 @container filterbar (max-width: 630px) {
-  .ProjectFilterBar .status-box {gap: 10px;}
+  .ProjectFilterBar .status-box {
+    gap: 10px;
+  }
   .ProjectFilterBar .status-box button {
     font-size: 15px;
   }
-  .ProjectFilterBar .date-box {gap: 10px;}
+  .ProjectFilterBar .date-box {
+    gap: 10px;
+  }
 }
 .item-list-bar {
   display: flex;
@@ -680,10 +697,12 @@ li:hover .arrow-right:before {
   padding-right: 10px;
   overflow-y: scroll;
   min-height: 0;
-	-ms-overflow-style: none;
-	scrollbar-width: none;	
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
-.item__list::-webkit-scrollbar {display: none;}
+.item__list::-webkit-scrollbar {
+  display: none;
+}
 .item__list .no-txt {
   font-weight: 300;
   font-size: 14px;
@@ -695,7 +714,9 @@ li:hover .arrow-right:before {
   justify-content: space-between;
   cursor: pointer;
 }
-.ProjectItem + .ProjectItem {margin-top: 10px;}
+.ProjectItem + .ProjectItem {
+  margin-top: 10px;
+}
 .ProjectItem p {
   flex-shrink: 0;
   margin: 0;
@@ -743,19 +764,23 @@ li:hover .arrow-right:before {
   line-height: 14px;
   color: rgb(255, 69, 0);
 }
-.ProjectItem .title .tag:first-child {margin-left: 4px;}
+.ProjectItem .title .tag:first-child {
+  margin-left: 4px;
+}
 .ProjectItem .title .tag.new {
   margin: 0;
   background-color: transparent;
   font-weight: 900;
-  animation: blink .5s infinite alternate;
+  animation: blink 0.5s infinite alternate;
 }
 
-
-
 @keyframes blink {
-  0% {opacity: 0;}
-  100% {opacity: 1;}
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
 /* //Project List */
 
@@ -766,7 +791,9 @@ li:hover .arrow-right:before {
   height: 100%;
   box-sizing: border-box;
 }
-.ProjectView p {font-size: 12px;}
+.ProjectView p {
+  font-size: 12px;
+}
 .ProjectView .no-txt {
   display: flex;
   flex-direction: column;
@@ -786,9 +813,11 @@ li:hover .arrow-right:before {
   background-size: contain;
   background-position: center;
   background-repeat: no-repeat;
-  background-image: url(../public/images/icon/ico_project_view.svg);
+  background-image: url(/images/icon/ico_project_view.svg);
 }
-.ProjectView p {margin: 0;}
+.ProjectView p {
+  margin: 0;
+}
 .ProjectView .project-info div {
   display: flex;
   justify-content: space-between;
@@ -804,7 +833,7 @@ li:hover .arrow-right:before {
   font-weight: 300;
   font-size: 12px;
   color: rgb(153, 153, 153);
-} 
+}
 .ProjectView .project-info .url__btn {
   padding: 12px;
   font-size: 10px;
@@ -816,11 +845,13 @@ li:hover .arrow-right:before {
   width: 94px;
   height: 34px;
 }
-.ProjectView .project-info .CustomSelect._status .select-options {top: 40px;}
+.ProjectView .project-info .CustomSelect._status .select-options {
+  top: 40px;
+}
 .ProjectView .project-info .title {
   font-weight: 700;
   font-size: 20px;
-} 
+}
 .ProjectView .project-info .bt {
   flex-wrap: wrap;
   gap: 0 32px;
@@ -830,7 +861,9 @@ li:hover .arrow-right:before {
   display: flex;
   font-size: 14px;
 }
-.ProjectView .project-info dl + dl {margin-left: 32px;}
+.ProjectView .project-info dl + dl {
+  margin-left: 32px;
+}
 .ProjectView .project-info dl dt {
   font-weight: 300;
   color: rgb(153, 153, 153);
@@ -859,9 +892,11 @@ li:hover .arrow-right:before {
   background-color: rgb(204, 204, 204);
 }
 .ProjectView .project-detail .con::-webkit-scrollbar-track {
-	background-color: rgb(255, 255, 255);
+  background-color: rgb(255, 255, 255);
 }
-.ProjectView .project-detail._close {display: none;}
+.ProjectView .project-detail._close {
+  display: none;
+}
 .ProjectView .project-detail p {
   font-weight: 400;
   font-size: 16px;
@@ -873,9 +908,11 @@ li:hover .arrow-right:before {
 .ProjectView .project-control {
   position: relative;
   margin-top: 32px;
-  border-bottom: 1px solid rgb(238, 238, 238); 
+  border-bottom: 1px solid rgb(238, 238, 238);
 }
-.ProjectView .project-control button {cursor: pointer;}
+.ProjectView .project-control button {
+  cursor: pointer;
+}
 .ProjectView .project-control .control__btn {
   padding: 11px 16px;
   font-weight: 300;
@@ -886,7 +923,9 @@ li:hover .arrow-right:before {
   font-weight: 700;
   color: rgb(0, 0, 0);
 }
-.ProjectView .project-control .control__btn:first-child {margin-left: -16px;}
+.ProjectView .project-control .control__btn:first-child {
+  margin-left: -16px;
+}
 .ProjectView .project-control .indicator-bar {
   position: absolute;
   bottom: 0;
@@ -906,7 +945,7 @@ li:hover .arrow-right:before {
   background-repeat: no-repeat;
   background-position: center;
   background-size: 12px;
-  background-image: url(../public/images/icon/ico_expand.svg);
+  background-image: url(/images/icon/ico_expand.svg);
 }
 .ProjectView .project-task {
   flex: 1;
@@ -931,7 +970,9 @@ li:hover .arrow-right:before {
   box-sizing: border-box;
   overflow-y: scroll;
 }
-.CommentTask .comment-list > div + div {margin-top: 12px;}
+.CommentTask .comment-list > div + div {
+  margin-top: 12px;
+}
 .CommentTask .comment-list::-webkit-scrollbar {
   width: 2px;
 }
@@ -939,7 +980,7 @@ li:hover .arrow-right:before {
   background-color: rgb(204, 204, 204);
 }
 .CommentTask .comment-list::-webkit-scrollbar-track {
-	background-color: rgb(255, 255, 255);
+  background-color: rgb(255, 255, 255);
 }
 .CommentTask .comment-list > div {
   display: flex;
@@ -1015,7 +1056,7 @@ li:hover .arrow-right:before {
   padding: 7px 16px;
   border-radius: 10px;
   background-color: rgb(255, 255, 255);
-  box-shadow: 0 3px 10px rgba(0, 0, 0, .1);
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
   z-index: 1;
 }
 .CommentTask .comment-option button {
@@ -1032,11 +1073,11 @@ li:hover .arrow-right:before {
   background-repeat: no-repeat;
   background-position: right 16px center;
   background-size: 13px;
-  background-image: url(../public/images/icon/ico_file_down.svg);
+  background-image: url(/images/icon/ico_file_down.svg);
   cursor: pointer;
 }
 .CommentTask .comment .msg .txt._file:before {
-  content: '';
+  content: "";
   position: absolute;
   top: 50%;
   left: 3px;
@@ -1048,13 +1089,13 @@ li:hover .arrow-right:before {
   background-repeat: no-repeat;
   background-position: left 13px center;
   background-size: 11px;
-  background-image: url(../public/images/icon/ico_file.svg);
+  background-image: url(/images/icon/ico_file.svg);
 }
 .CommentTask .comment .msg .time {
   flex-shrink: 0;
   font-weight: 400;
   font-size: 10px;
-  color: rgb(153, 153, 153)
+  color: rgb(153, 153, 153);
 }
 .CommentTask .comment._us {
   justify-content: flex-end;
@@ -1062,8 +1103,12 @@ li:hover .arrow-right:before {
 .CommentTask .comment._us .profile {
   order: 1;
 }
-.CommentTask .comment._us .msg-box {align-items: flex-end;}
-.CommentTask .comment._us .user-name {text-align: right;}
+.CommentTask .comment._us .msg-box {
+  align-items: flex-end;
+}
+.CommentTask .comment._us .user-name {
+  text-align: right;
+}
 .CommentTask .comment._us .msg .txt {
   order: 1;
   background-color: rgb(248, 248, 248);
@@ -1086,7 +1131,9 @@ li:hover .arrow-right:before {
   background: transparent;
   outline: none;
 }
-.CommentTask .comment-input textarea::placeholder {color: rgb(153, 153, 153);}
+.CommentTask .comment-input textarea::placeholder {
+  color: rgb(153, 153, 153);
+}
 .CommentTask .comment-input .control-box {
   display: flex;
   justify-content: space-between;
@@ -1102,7 +1149,7 @@ li:hover .arrow-right:before {
   display: flex;
   align-items: center;
 }
-.CommentTask .comment-input .control-box button { 
+.CommentTask .comment-input .control-box button {
   font-size: 0;
   background-repeat: no-repeat;
   background-position: center;
@@ -1113,14 +1160,14 @@ li:hover .arrow-right:before {
   height: 12px;
   padding: 8px;
   background-size: 12px;
-  background-image: url(../public/images/icon/ico_file_upload.svg);
+  background-image: url(/images/icon/ico_file_upload.svg);
 }
 .CommentTask .comment-input .control-box .set-manager__btn {
   width: 10px;
   height: 12px;
   padding: 8px;
   background-size: 10px;
-  background-image: url(../public/images/icon/ico_manager.svg);
+  background-image: url(/images/icon/ico_manager.svg);
 }
 .CommentTask .comment-input .control-box .cmt-write__btn {
   width: 34px;
@@ -1154,7 +1201,7 @@ li:hover .arrow-right:before {
   background-color: rgb(204, 204, 204);
 }
 .FileTask .file-list::-webkit-scrollbar-track {
-	background-color: rgb(255, 255, 255);
+  background-color: rgb(255, 255, 255);
 }
 .FileTask .file-list > div {
   display: flex;
@@ -1210,7 +1257,7 @@ li:hover .arrow-right:before {
   background-repeat: no-repeat;
   background-position: right 16px center;
   background-size: 13px;
-  background-image: url(../public/images/icon/ico_file_down.svg);
+  background-image: url(/images/icon/ico_file_down.svg);
   cursor: pointer;
 }
 .FileTask .file .down-box p {
@@ -1219,7 +1266,7 @@ li:hover .arrow-right:before {
   color: rgb(51, 51, 51);
 }
 .FileTask .file .down-box:before {
-  content: '';
+  content: "";
   position: absolute;
   top: 50%;
   left: 3px;
@@ -1231,7 +1278,7 @@ li:hover .arrow-right:before {
   background-repeat: no-repeat;
   background-position: left 13px center;
   background-size: 11px;
-  background-image: url(../public/images/icon/ico_file.svg);
+  background-image: url(/images/icon/ico_file.svg);
 }
 
 .FileTask .file-input {
@@ -1249,12 +1296,12 @@ li:hover .arrow-right:before {
   cursor: pointer;
 }
 .FileTask .file-input .file-upload__btn:before {
-  content: '';
+  content: "";
   display: block;
   width: 12px;
   height: 12px;
   margin-right: 6px;
-  background: url(../public/images/icon/ico_file_upload.svg) center / contain no-repeat;
+  background: url(/images/icon/ico_file_upload.svg) center / contain no-repeat;
 }
 /* //File */
 
@@ -1269,10 +1316,12 @@ li:hover .arrow-right:before {
   flex: 1;
   box-sizing: border-box;
   overflow-y: scroll;
-	-ms-overflow-style: none;
-	scrollbar-width: none;	
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
-.TimeTask .time-list::-webkit-scrollbar {display: none;}
+.TimeTask .time-list::-webkit-scrollbar {
+  display: none;
+}
 .TimeTask .time-list > div {
   display: flex;
   flex-direction: column;
