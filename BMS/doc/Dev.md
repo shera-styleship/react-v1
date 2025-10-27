@@ -85,10 +85,12 @@ src/
 
 | 파일명 | 📝 설명 |
 |:--|:--|
+| `Alarm.jsx` | 헤더 알람 노출 컴포넌트 |
+| `AlarmItem.jsx` | 알람 컴포넌트 내 아이템 렌더링 |
+| `Alert.jsx` | 알림/확인 레이어 컴포넌트 |
 | `Button.jsx` | 기본 버튼 컴포넌트 |
 | `Input.jsx` | 기본 인풋 컴포넌트 |
 | `Select.jsx` | 커스텀 셀렉트 컴포넌트 |
-| `Alert.jsx` | 알림/확인 레이어 컴포넌트 |
 
 #### 🔹 components/layout/
 전체 페이지의 공통 구조 요소입니다.
@@ -124,6 +126,7 @@ src/
 |:--|:--|
 | `constants.js` | 공용 상수 정의 |
 | `getUserImageSrc.js` | 사용자 프로필 이미지 경로 반환 함수 |
+| `env.js` | 환경설정 |
 
 ### 🗂️ 5. mock/ - 임시 데이터
 | 파일명 | 📝 설명 |
