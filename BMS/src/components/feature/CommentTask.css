@@ -115,7 +115,7 @@
   background-repeat: no-repeat;
   background-position: right 16px center;
   background-size: 13px;
-  background-image: url(/images/icon/ico_file_down.svg);
+  background-image: url(@/assets/images/icon/ico_file_down.svg);
   cursor: pointer;
 }
 .CommentTask .comment .msg .txt._file:before {
@@ -131,7 +131,7 @@
   background-repeat: no-repeat;
   background-position: left 13px center;
   background-size: 11px;
-  background-image: url(/images/icon/ico_file.svg);
+  background-image: url(@/assets/images/icon/ico_file.svg);
 }
 .CommentTask .comment .msg .time {
   flex-shrink: 0;
@@ -202,14 +202,14 @@
   height: 12px;
   padding: 8px;
   background-size: 12px;
-  background-image: url(/images/icon/ico_file_upload.svg);
+  background-image: url(@/assets/images/icon/ico_file_upload.svg);
 }
 .CommentTask .comment-input .control-box .set-manager__btn {
   width: 10px;
   height: 12px;
   padding: 8px;
   background-size: 10px;
-  background-image: url(/images/icon/ico_manager.svg);
+  background-image: url(@/assets/images/icon/ico_manager.svg);
 }
 .CommentTask .comment-input .control-box .cmt-write__btn {
   width: 34px;
@@ -221,3 +221,4 @@
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14.207' height='13.414' viewBox='0 0 14.207 13.414'%3E%3Cg id='그룹_97' data-name='그룹 97' transform='translate(-1848.594 -994.849)'%3E%3Cline id='선_31' data-name='선 31' x2='11.933' transform='translate(1849.094 1001.495)' fill='none' stroke='%23fff' stroke-linecap='round' stroke-width='1'/%3E%3Cline id='선_32' data-name='선 32' x2='8.478' transform='translate(1856.098 995.556) rotate(45)' fill='none' stroke='%23fff' stroke-linecap='round' stroke-width='1'/%3E%3Cline id='선_33' data-name='선 33' y2='8.478' transform='translate(1862.094 1001.561) rotate(45)' fill='none' stroke='%23fff' stroke-linecap='round' stroke-width='1'/%3E%3C/g%3E%3C/svg%3E%0A");
 }
 /* //Comment */
+
