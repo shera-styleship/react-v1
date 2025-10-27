@@ -1,0 +1,24 @@
+.Wrap {
+  width: 100%;
+  min-width: 1200px;
+  height: 100vh;
+  min-height: 700px;
+
+  /*background-color: rgb(0, 139, 58);*/
+}
+
+/* ContentWrap */
+.ContentWrap {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  height: calc(100% - 81px);
+}
+/* //ContentWrap */
+
+/* Contents */
+.Contents {
+  flex: 1;
+  height: 100%;
+}
+/* //Contents */
