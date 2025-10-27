@@ -140,5 +140,107 @@
       "projectContent": "test!",
       "projectDeadline": "2025-10-24"
     }
+  ],
+  "comments": [
+    {
+      "id": "9495",
+      "projectId": 84745,
+      "userId": "0",
+      "type": "_us",
+      "name": "홍길동",
+      "profile": "/images/profile01.jpg",
+      "time": "오후 5:51",
+      "createdAt": "2025-10-27T08:51:36.826Z",
+      "text": "test!"
+    },
+    {
+      "id": "268d",
+      "projectId": 84745,
+      "userId": "0",
+      "type": "_us",
+      "name": "홍길동",
+      "profile": "/images/profile01.jpg",
+      "time": "오후 5:51",
+      "createdAt": "2025-10-27T08:51:42.081Z",
+      "text": "홍길동이 썼어요"
+    },
+    {
+      "id": "a5eb",
+      "projectId": 84745,
+      "userId": "1",
+      "type": "_us",
+      "name": "강아지",
+      "profile": "/images/profile02.jpg",
+      "time": "오후 5:52",
+      "createdAt": "2025-10-27T08:52:00.249Z",
+      "text": "test!"
+    },
+    {
+      "id": "bc2b",
+      "projectId": 84745,
+      "userId": "1",
+      "type": "_us",
+      "name": "강아지",
+      "profile": "/images/profile02.jpg",
+      "time": "오후 5:52",
+      "createdAt": "2025-10-27T08:52:05.177Z",
+      "text": "강아지가 썼어요"
+    },
+    {
+      "id": "a987",
+      "projectId": 84745,
+      "userId": "2",
+      "type": "_us",
+      "name": "임꺽정",
+      "profile": "/images/profile03.jpg",
+      "time": "오후 5:52",
+      "createdAt": "2025-10-27T08:52:22.345Z",
+      "text": "test!"
+    },
+    {
+      "id": "932f",
+      "projectId": 84745,
+      "userId": "2",
+      "type": "_us",
+      "name": "임꺽정",
+      "profile": "/images/profile03.jpg",
+      "time": "오후 5:52",
+      "createdAt": "2025-10-27T08:52:27.665Z",
+      "text": "임꺽정이 썼어요"
+    },
+    {
+      "id": "aaac",
+      "projectId": 84745,
+      "userId": "2",
+      "type": "_us",
+      "name": "임꺽정",
+      "profile": "/images/profile03.jpg",
+      "time": "오후 5:53",
+      "createdAt": "2025-10-27T08:53:03.756Z",
+      "text": "이미지 첨부합니다."
+    },
+    {
+      "id": "08e3",
+      "projectId": 84745,
+      "userId": "2",
+      "type": "_us",
+      "name": "임꺽정",
+      "profile": "/images/profile03.jpg",
+      "time": "오후 5:58",
+      "createdAt": "2025-10-27T08:58:18.537Z",
+      "text": "250818_수정사항.jpg",
+      "file": true
+    },
+    {
+      "id": "2f31",
+      "projectId": 84745,
+      "userId": "2",
+      "type": "_us",
+      "name": "임꺽정",
+      "profile": "/images/profile03.jpg",
+      "time": "오후 5:58",
+      "createdAt": "2025-10-27T08:58:18.537Z",
+      "text": "이미지 첨부합니다."
+    }
   ]
 }
