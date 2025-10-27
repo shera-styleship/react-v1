@@ -18,13 +18,19 @@ API 환경 변수 설정 방법
 **2. 파일 생성**
 프로젝트 폴더 바로 아래 파일 생성
 >.env (공통)
+>
 >.env.development (개발용)
+>
 >.env.production (배포용)
+>
 >/utils/env.js (환경변수 불러오는 용도)
 
->예) 
+>예)
+>
 >BMS/.env
+>
 >BMS/.env.development
+>
 >BMS/.env.production
 >
 <img width="308" height="730" alt="Image" src="https://github.com/user-attachments/assets/8df2afc4-48c2-40c5-8b1a-b22ccc759790" />
