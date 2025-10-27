@@ -75,7 +75,7 @@
   background-repeat: no-repeat;
   background-position: right 16px center;
   background-size: 13px;
-  background-image: url(/images/icon/ico_file_down.svg);
+  background-image: url(@/assets/images/icon/ico_file_down.svg);
   cursor: pointer;
 }
 .FileTask .file .down-box p {
@@ -96,7 +96,7 @@
   background-repeat: no-repeat;
   background-position: left 13px center;
   background-size: 11px;
-  background-image: url(/images/icon/ico_file.svg);
+  background-image: url(@/assets/images/icon/ico_file.svg);
 }
 
 .FileTask .file-input {
@@ -119,6 +119,7 @@
   width: 12px;
   height: 12px;
   margin-right: 6px;
-  background: url(/images/icon/ico_file_upload.svg) center / contain no-repeat;
+  background: url(@/assets/images/icon/ico_file_upload.svg) center / contain no-repeat;
 }
 /* //File */
+
