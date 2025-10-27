@@ -56,7 +56,6 @@
 -   선택된 값이 있을 경우 `.select-display.selected` 클래스가 추가됨
 
 ### 🧰 기본 사용 예시
-![Select Component Preview](../../assets/docs/select_preview.png)  
 
 ``` jsx
 import { Select } from "@/components/Select";
