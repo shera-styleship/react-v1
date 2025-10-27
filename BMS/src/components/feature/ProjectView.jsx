@@ -1,3 +1,4 @@
+import "@components/feature/ProjectView.css";
 import { useState, useRef, useEffect } from "react";
 import Select from "@components/common/Select";
 import CommentTask from "@components/feature/CommentTask";

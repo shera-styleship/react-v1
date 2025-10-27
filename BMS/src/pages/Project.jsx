@@ -1,4 +1,5 @@
 // src/pages/Project.jsx
+import "@/pages/Project.css";
 import { useParams, useNavigate } from "react-router-dom";
 import { useState, useEffect, useContext } from "react";
 import { UserDataContext } from "@/App";

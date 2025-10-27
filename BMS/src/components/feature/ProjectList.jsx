@@ -1,3 +1,4 @@
+import "@components/feature/ProjectList.css";
 import { useState, useEffect } from "react";
 import ProjectFilterBar from "@components/feature/ProjectFilterBar";
 import ProjectItem from "@components/feature/ProjectItem";

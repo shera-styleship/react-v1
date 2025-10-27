@@ -1,3 +1,4 @@
+import "@components/layout/Header.css";
 import { useContext, useMemo, useState } from "react";
 import { UserDataContext } from "@/App";
 import { UserDispatchContext } from "@/App";

@@ -1,3 +1,4 @@
+import "@components/layout/Lnb.css";
 import { NavLink } from "react-router-dom";
 import { useState, useContext } from "react";
 import LogoStyleship from "@/assets/images/common/logo_styleship.png";

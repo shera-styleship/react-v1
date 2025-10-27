@@ -1,3 +1,4 @@
+import "@components/common/Alert.css";
 import { useState, useContext, useEffect } from "react";
 import Button from "@components/common/Button";
 import { UserDataContext } from "@/App";
