@@ -115,6 +115,7 @@ src/
 | `CommentTask.jsx` | 프로젝트 상세 하단 탭 내 코멘트 렌더링 |
 | `FileTask.jsx` | 프로젝트 상세 하단 탭 내 파일 모아보기 렌더링 |
 | `TimeTask.jsx` | 프로젝트 상세 하단 탭 내 작업 시간 렌더링 |
+| `Mentions.jsx` | 멘션, react-mentions 라이브러리 사용 |
 
 #### 🔹 components/network/
 네트워크 관련 컴포넌트입니다.
