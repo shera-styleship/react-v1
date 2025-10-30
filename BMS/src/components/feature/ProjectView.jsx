@@ -4,12 +4,12 @@ import Select from "@components/common/Select";
 import CommentTask from "@components/feature/CommentTask";
 import FileTask from "@components/feature/FileTask";
 import TimeTask from "@components/feature/TimeTask";
-import { PROJECT_STATUS_OPTIONS } from "@/utils/constants";
+import { STATUS_OPTIONS_STYLESHIP } from "@/utils/constants";
 
 const ProjectView = ({ project }) => {
   const [status, setStatus] = useState(project?.projectStatus);
   const [activeTab, setActiveTab] = useState("comment");
-  const [indicatorStyle, setIndicatorStyle] = useState({ left: 0, width: 0 });
+  const [indicatorStyle, setIndicatorStyle] = useState({ left: 0, width: 36 });
   const [isDetailVisible, setIsDetailVisible] = useState(true);
 
   const controlRef = useRef(null);
@@ -75,7 +75,7 @@ const ProjectView = ({ project }) => {
             <Select
               name="status"
               value={status}
-              options={PROJECT_STATUS_OPTIONS}
+              options={STATUS_OPTIONS_STYLESHIP}
               onChange={handleStatusChange}
               className={`_status _${status}`}
             />
@@ -94,7 +94,22 @@ const ProjectView = ({ project }) => {
           <div>
             <dl>
               <dt>등록일</dt>
-              <dd>{project.projectDate}</dd>
+              <dd>
+                {project.projectDate
+                  ? (() => {
+                      const d = new Date(project.projectDate);
+                      const yyyy = d.getFullYear();
+                      const mm = String(d.getMonth() + 1).padStart(2, "0");
+                      const dd = String(d.getDate()).padStart(2, "0");
+                      const hh = d.getHours();
+                      const ampm = hh >= 12 ? "오후" : "오전";
+                      const hour12 = hh % 12 || 12;
+                      const min = String(d.getMinutes()).padStart(2, "0");
+                      const sec = String(d.getSeconds()).padStart(2, "0");
+                      return `${yyyy}-${mm}-${dd} ${ampm} ${hour12}:${min}:${sec}`;
+                    })()
+                  : ""}
+              </dd>
             </dl>
             <dl>
               <dt>마감일</dt>

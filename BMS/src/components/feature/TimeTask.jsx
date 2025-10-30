@@ -25,7 +25,7 @@ const TimeTask = ()=>{
                         </div>
                     </div>
 
-                                        <div class="time">
+                     <div class="time">
                         <dl>
                             <dt>작업자</dt>
                             <dd>홍길동</dd>
@@ -43,7 +43,7 @@ const TimeTask = ()=>{
                         </div>
                     </div>
 
-                                        <div class="time">
+                    <div class="time">
                         <dl>
                             <dt>작업자</dt>
                             <dd>홍길동</dd>

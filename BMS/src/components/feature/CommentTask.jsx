@@ -112,7 +112,6 @@ const CommentTask = ({ projectId, projectCompany }) => {
       userId: currentUser.id,
       type,
       name: currentUser.userName,
-      profile: currentUser.userImage,
       time,
       createdAt,
     };
@@ -188,7 +187,7 @@ const CommentTask = ({ projectId, projectCompany }) => {
   );
 
   // ✅ 우클릭 메뉴 렌더링 (마우스 근처)
-  const renderCommentOption = () => {
+  /*const renderCommentOption = () => {
     if (!activeOption) return null;
     const { id, x, y } = activeOption;
     const comment = comments.find((c) => c.id === id);
@@ -218,7 +217,7 @@ const CommentTask = ({ projectId, projectCompany }) => {
         </button>
       </div>
     );
-  };
+  };*/
 
   if (loading) return <div></div>;
 
@@ -252,7 +251,7 @@ const CommentTask = ({ projectId, projectCompany }) => {
                     {/* 프로필: 같은 사람이 같은 분에 연속으로 보냈다면 생략 */}
                     {!sameSenderAsPrev && (
                       <div className="profile">
-                        <img src={msg.profile} alt="" />
+                        <img src={userData.find((u) => u.id === msg.userId)?.userImage || "/default.png"} alt="" />
                       </div>
                     )}
 
@@ -291,7 +290,7 @@ const CommentTask = ({ projectId, projectCompany }) => {
       </div>
 
       {/* floating 옵션창 */}
-      {renderCommentOption()}
+      {/* {renderCommentOption()} */}
 
       {/* 입력 영역 */}
       <div className="comment-input">
@@ -318,6 +317,12 @@ const CommentTask = ({ projectId, projectCompany }) => {
               style={{ display: "none" }}
               onChange={handleFileChange}
             />
+            <button
+              type="button"
+              className="set-manager__btn"
+            >
+              작업 위임
+            </button>
             <button
               type="button"
               className="cmt-write__btn"

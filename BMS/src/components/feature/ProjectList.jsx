@@ -1,9 +1,11 @@
 import "@components/feature/ProjectList.css";
 import { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
 import ProjectFilterBar from "@components/feature/ProjectFilterBar";
 import ProjectItem from "@components/feature/ProjectItem";
 
 const ProjectList = ({ projects, onSelect }) => {
+  const { projectNo } = useParams();
   const [filters, setFilters] = useState({
     company: "",
     brand: "",
@@ -119,6 +121,7 @@ const ProjectList = ({ projects, onSelect }) => {
             project={p}
             onClick={() => onSelect(p)}
             onBrandClick={() => handleBrandClick(p.projectBrand)}
+            isSelected={String(p.projectNo) === projectNo}
           />
         ))}
         {filteredProjects.length === 0 && (
@@ -130,3 +133,4 @@ const ProjectList = ({ projects, onSelect }) => {
 };
 
 export default ProjectList;
+ 

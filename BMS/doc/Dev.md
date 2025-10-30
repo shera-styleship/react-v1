@@ -27,6 +27,7 @@ src/
  ├── mock/               # 임시 데이터(JSON)
  ├── hooks/              # 커스텀 훅
  ├── utils/              # 유틸 함수, 상수, API
+ ├── config/             # 설정 데이터
  ├── assets/             # 이미지, 아이콘, 스타일
 ```
 
@@ -39,6 +40,7 @@ src/
 | **Feature** | 특정 기능 담당, 내부 상태 포함 | `ProjectList`, `ProjectView`, `ProjectFilterBar`, `ProjectItem`, `NewProject`    |
 | **Utils**   | 순수 함수, API 모듈, 포맷터    | `constants`, `getUserImageSrc`            |
 | **Hooks**   | 로직 재사용을 위한 커스텀 훅   |     |
+| **Config**   | 설정 데이터  |  `filterBarOptions`  |
 
 
 ## 🗂️  doc/ - 내부 가이드
@@ -132,4 +134,9 @@ src/
 | 파일명 | 📝 설명 |
 |:--|:--|
 | `db.json` | 테스트용 임시 데이터(JSON) 파일 |
+
+### 🗂️ 6. config/ - 설정 데이터
+| 파일명 | 📝 설명 |
+|:--|:--|
+| `filterBarOptions.js` | 프로젝트 리스트 필터링 옵션(회사/브랜드) |
 

@@ -59,7 +59,7 @@ const Project = () => {
           {loading ? (
             <p>Loading...</p>
           ) : (
-            <ProjectList projects={projects} onSelect={handleSelect} />
+            <ProjectList projects={projects} onSelect={handleSelect}/>
           )}
         </div>
         <div>

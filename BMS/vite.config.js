@@ -28,6 +28,7 @@ export default defineConfig({
       "@": path.resolve(dirname, "src"), // '@/...' → src/...
       "@assets": path.resolve(dirname, "src/assets"), // '@assets/...' → src/assets/...
       "@components": path.resolve(dirname, "src/components"),
+      "@config": path.resolve(dirname, "src/config"),
     },
   },
 });

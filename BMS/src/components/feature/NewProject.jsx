@@ -124,7 +124,7 @@ const NewProject = ({ alertType = true, onClose }) => {
       const newProject = {
         id: String(Date.now()),
         projectNo: nextNo,
-        projectDate: new Date().toISOString().split("T")[0],
+        projectDate: new Date().toISOString(),
         projectStatus: "receipt",
         projectTeam: "CR",
         writer: form.writer,
