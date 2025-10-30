@@ -192,48 +192,6 @@
       "projectDeadline": ""
     },
     {
-      "id": "1761643730384",
-      "projectNo": 84747,
-      "projectDate": "2025-10-28",
-      "projectStatus": "receipt",
-      "projectTeam": "CR",
-      "writer": "홍길동",
-      "projectCompany": "NPLUS(네파)",
-      "projectBrand": "NEPA",
-      "projectSort": "이벤트",
-      "projectTitle": "dfsdf",
-      "projectContent": "todtjd\n테스트\n줄바꿈\n확인용\n확인 ㄱㄱㄱ",
-      "projectDeadline": ""
-    },
-    {
-      "id": "1761643807048",
-      "projectNo": 84748,
-      "projectDate": "2025-10-28T02:44:53.917Z",
-      "projectStatus": "receipt",
-      "projectTeam": "CR",
-      "writer": "홍길동",
-      "projectCompany": "NPLUS(네파)",
-      "projectBrand": "NEPA",
-      "projectSort": "이벤트",
-      "projectTitle": "sg",
-      "projectContent": "ej~~~~ 넎어볼게요\n엔터\n엔터\n엔터\n엔터\n엔터\n엔터\n엔터\n스크로ㅓㄹ확인!",
-      "projectDeadline": ""
-    },
-    {
-      "id": "1761705893917",
-      "projectNo": 84749,
-      "projectDate": "2025-10-29T02:44:53.917Z",
-      "projectStatus": "receipt",
-      "projectTeam": "CR",
-      "writer": "홍길동",
-      "projectCompany": "NPLUS(네파)",
-      "projectBrand": "NEPA",
-      "projectSort": "기획전",
-      "projectTitle": "ㅇㅇㅇ",
-      "projectContent": "ㅇ",
-      "projectDeadline": ""
-    },
-    {
       "id": "1761724296366",
       "projectNo": 84750,
       "projectDate": "2025-10-29T07:51:36.366Z",
@@ -255,7 +213,6 @@
       "userId": "0",
       "type": "_us",
       "name": "홍길동",
-      "profile": "/images/profile01.jpg",
       "time": "오후 5:51",
       "createdAt": "2025-10-27T08:51:36.826Z",
       "text": "test!"
@@ -266,7 +223,6 @@
       "userId": "0",
       "type": "_us",
       "name": "홍길동",
-      "profile": "/images/profile01.jpg",
       "time": "오후 5:51",
       "createdAt": "2025-10-27T08:51:42.081Z",
       "text": "홍길동이 썼어요"
@@ -277,7 +233,6 @@
       "userId": "1",
       "type": "_us",
       "name": "강아지",
-      "profile": "/images/profile02.jpg",
       "time": "오후 5:52",
       "createdAt": "2025-10-27T08:52:00.249Z",
       "text": "test!"
@@ -288,7 +243,6 @@
       "userId": "1",
       "type": "_us",
       "name": "강아지",
-      "profile": "/images/profile02.jpg",
       "time": "오후 5:52",
       "createdAt": "2025-10-27T08:52:05.177Z",
       "text": "강아지가 썼어요"
@@ -299,7 +253,6 @@
       "userId": "2",
       "type": "_us",
       "name": "임꺽정",
-      "profile": "/images/profile03.jpg",
       "time": "오후 5:52",
       "createdAt": "2025-10-27T08:52:22.345Z",
       "text": "test!"
@@ -310,7 +263,6 @@
       "userId": "2",
       "type": "_us",
       "name": "임꺽정",
-      "profile": "/images/profile03.jpg",
       "time": "오후 5:52",
       "createdAt": "2025-10-27T08:52:27.665Z",
       "text": "임꺽정이 썼어요"
@@ -321,7 +273,6 @@
       "userId": "2",
       "type": "_us",
       "name": "임꺽정",
-      "profile": "/images/profile03.jpg",
       "time": "오후 5:53",
       "createdAt": "2025-10-27T08:53:03.756Z",
       "text": "이미지 첨부합니다."
@@ -332,7 +283,6 @@
       "userId": "2",
       "type": "_us",
       "name": "임꺽정",
-      "profile": "/images/profile03.jpg",
       "time": "오후 5:58",
       "createdAt": "2025-10-27T08:58:18.537Z",
       "text": "250818_수정사항.jpg",
@@ -344,7 +294,6 @@
       "userId": "2",
       "type": "_us",
       "name": "임꺽정",
-      "profile": "/images/profile03.jpg",
       "time": "오후 5:58",
       "createdAt": "2025-10-27T08:58:18.537Z",
       "text": "이미지 첨부합니다."
@@ -355,7 +304,6 @@
       "userId": "0",
       "type": "_us",
       "name": "홍길동",
-      "profile": "/images/profile01.jpg",
       "time": "오후 6:05",
       "createdAt": "2025-10-28T09:05:44.624Z",
       "text": "입력\n엔터"
@@ -409,10 +357,10 @@
       "userId": "0",
       "name": "홍길동",
       "text": "9월 월간네파 수정.pptx",
-      "file": true,
       "type": "_us",
       "createdAt": "2025-10-30T02:36:44.005Z",
-      "time": "오전 11:36"
+      "time": "오전 11:36",
+      "file": true
     },
     {
       "id": "5307",
