@@ -1,10 +1,13 @@
+import "@components/feature/Mentions.css";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { MentionsInput, Mention } from "react-mentions";
 import { API_BASE } from "@/utils/env";
 
-const Mentions = () => {
+const Mentions = ( {value, onChange, currentUser } ) => {
   // 입력값(react-mentions가 관리하는 텍스트 전체)
-  const [value, setValue] = useState("");
+  //const [value, setValue] = useState("");
+  // 위에서 받아오는 것으로 변경. 
+
   // 서버에서 불러온 원본 사용자 목록
   const [userData, setUserData] = useState([]);
   // 제안 목록을 별도 DOM에 포털로 렌더링하기 위한 ref
@@ -12,12 +15,12 @@ const Mentions = () => {
   const portalRef = useRef(null);
 
   // ★ 데모용 현재 사용자 (실전에서는 로그인 컨텍스트/전역에서 주입)
-  const currentUser = {
+  /*const currentUser = {
     id: "99",
     userName: "관리자",
     userCompany: "STYLESHIP", // STYLESHIP, NPLUS(네파), 미스토코리아(주)
     role: "ADMIN", // ADMIN: 모두, USER: 같은 회사만
-  };
+  };*/
 
   // 1) 사용자 목록 불러오기
   //    API가 배열 또는 { userInfo: [...] } 두 형태를 지원한다고 가정하고 안전 파싱
@@ -79,12 +82,13 @@ const Mentions = () => {
         id: String(u?.id ?? i), // id 없으면 index로 대체
         // 검색/표시/저장 마크업에 사용될 표시 이름
         display: u?.userName || u?.userId || String(u?.id ?? `user-${i}`),
+        //display: u?.userName || u?.userId || `user-${i}`,
         avatar: u?.userImage,
         company: u?.userCompany || "기타",
         title: u?.jobTitle,
         team: u?.userTeam,
       }));
-  }, [userData]);
+  }, [userData, currentUser]);
 
   // 4) 저장 포맷 → 사람이 읽는 포맷으로 변환
   //    "@" → "@홍길동"
@@ -110,11 +114,14 @@ const Mentions = () => {
 
     // (3) 그룹 경계 감지 → 첫 항목에만 헤더를 보이도록 플래그 설정
     let prevGroup = null;
-    return filtered.map((u) => {
+    return filtered.map((u, i) => {
       const group = u.company || "기타";
+      const nextGroup = filtered[i + 1]?.company || null;
       const isFirstOfGroup = group !== prevGroup;
+      const isLastOfGroup = group !== nextGroup; // 다음 항목이 다르면 라스트
       prevGroup = group;
-      return { ...u, isFirstOfGroup, groupLabel: group };
+
+      return { ...u, isFirstOfGroup, isLastOfGroup, groupLabel: group };
     });
   };
 
@@ -126,43 +133,14 @@ const Mentions = () => {
     callback(list);
   };
 
-  // MentionsInput에 줄 최소 스타일(여기서는 highlighter만 z-index 조정)
-  // - highlighter: 하이라이트 레이어(겹침 제어용)
-  const styles = {
-    highlighter: { zIndex: 3, pointerEvents: "none" },
-
-    suggestions: {
-      boxShadow: "0px 3px 10px rgba(0, 0, 0, .16)",
-      borderRadius: "10px",
-      // <ul> 에 들어갈 인라인 스타일
-      list: {
-        display: "flex",
-        flexWrap: "wrap",
-        alignItems: "flex-end",
-        width: 200,
-      },
-      // <li> 에 들어갈 인라인 스타일
-      item: {
-        width: "50%", // 2열
-        boxSizing: "border-box", // 카드처럼 쓸 때 권장
-        listStyle: "none",
-        padding: 0, // 기본 패딩 제거하고 싶으면
-        "&focused": {
-          // 포커스된 <li>에만 적용
-          outline: "2px solid #eaf5ff",
-          backgroundColor: "#f7fbff",
-        },
-      },
-    },
-  };
 
   return (
     <div>
       <MentionsInput
         className="mentionWrap"
-        style={styles} // 내부 레이어 최소 스타일
+        //style={styles} // 내부 레이어 최소 스타일
         value={value ?? ""} // 항상 문자열 유지
-        onChange={(e) => setValue(e.target.value ?? "")}
+        onChange={(e) => onChange?.(e.target.value ?? "")} //부모로 전달
         placeholder="내용을 입력하세요."
         // 저장 마크업 포맷: @[표시이름](id)
         markup="@[__display__](__id__)"
@@ -171,6 +149,7 @@ const Mentions = () => {
         // 제안 목록을 별도 DOM에 렌더링해 z-index/overflow 문제 방지
         suggestionsPortalHost={portalRef.current || undefined}
       >
+
         <Mention
           trigger="@" // @ 입력 시 자동완성 시작
           data={dataProvider} // 자동완성 데이터 공급자
@@ -199,26 +178,7 @@ const Mentions = () => {
               <div>
                 {/* 그룹 헤더: 회사명(그룹의 첫 항목에만 표시) */}
                 {entry.isFirstOfGroup && (
-                  <div
-                    className="company-name"
-                    style={{
-                      position: "sticky", // 긴 리스트에서 상단 고정
-                      top: 0,
-                      background: "#f8fafc",
-                      width: "200px",
-                      boxSizing: "border-box",
-                      color: "#475569",
-                      fontSize: 12,
-                      fontWeight: 700,
-                      textAlign: "center",
-                      padding: "6px 10px",
-                      borderTop: index === 0 ? "none" : "1px solid #e5e7eb",
-                      borderBottom: "1px solid #e5e7eb",
-                      zIndex: 1,
-                    }}
-                  >
-                    {entry.groupLabel}
-                  </div>
+                  <div className="company-name">{entry.groupLabel}</div>
                 )}
 
                 {/* 실제 선택 영역: 이름 + 직급만 노출 */}
@@ -226,30 +186,20 @@ const Mentions = () => {
                   className={`mentions__suggestions__row ${
                     focused ? "is-focused" : ""
                   }`}
-                  style={{
-                    display: "flex",
-                    alignItems: "center",
-                    gap: 10,
-                    padding: "8px 10px",
-                    background: focused ? "#eaf5ff" : "#fff",
-                  }}
                 >
                   {/* 아바타(이미지 없으면 기본 이미지로 대체) */}
                   <img
                     src={entry.avatar || "/images/profile-default.jpg"}
                     alt=""
-                    width={24}
-                    height={24}
-                    style={{ borderRadius: 999 }}
                     onError={(e) =>
                       (e.currentTarget.src = "/images/profile-default.jpg")
                     }
                   />
-                  <div style={{ lineHeight: 1.2 }}>
+                  <div>
                     <div>{nameNode}</div>
                     {/* 직함/팀 정보가 있을 때만 보이도록 처리 */}
                     {entry.title && (
-                      <small style={{ color: "#6b7280" }}>
+                      <small>
                         {entry.team} {entry.title}
                       </small>
                     )}
@@ -258,16 +208,12 @@ const Mentions = () => {
               </div>
             );
           }}
-          // 입력창 안에서 멘션 토큰 스타일(말머리 배경 등)
-          style={{
-            backgroundColor: "rgb(248,248,248)",
-            borderRadius: 4,
-            fontWeight: "700",
-            color: "rgb(0,0,0)",
-          }}
+          
           // 멘션 선택 후 뒤에 공백 자동 추가(연속 입력 편의)
           appendSpaceOnAdd
-        />
+        /> 
+
+
       </MentionsInput>
 
       {/* 제안 포털 루트: 제안 리스트 DOM을 여기로 렌더링 */}

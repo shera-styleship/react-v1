@@ -1,6 +1,8 @@
 import "@components/feature/CommentTask.css";
 import { useState, useEffect, useRef, useContext } from "react";
-import { UserDataContext } from "../../App";
+import { UserDataContext } from "@/App";
+import Mentions from "@components/feature/Mentions.jsx";
+import { API_BASE } from "@/utils/env";
 
 // ✅ 날짜 포맷팅
 const getFormattedDate = (isoDate) => {
@@ -23,9 +25,18 @@ const getFormattedTime = () => {
   return `${hours > 12 ? "오후" : "오전"} ${hours % 12 || 12}:${minutes}`;
 };
 
+// ✅ 멘션 포맷을 HTML로 변환
+const humanizeMentions = (text) => {
+  if (!text) return "";
+  return text.replace(
+    /\@\[(.+?)\]\((.+?)\)/g,
+    `<span class="mention">@$1</span>`
+  );
+};
+
 const CommentTask = ({ projectId, projectCompany }) => {
   const { userData, auth } = useContext(UserDataContext);
-  const currentUser = userData.find((u) => u.id === auth.userId);
+  const currentUser = userData?.find((u) => u.id === auth.userId) || null;
 
   const [comments, setComments] = useState([]);
   const [activeOption, setActiveOption] = useState(null);
@@ -41,7 +52,7 @@ const CommentTask = ({ projectId, projectCompany }) => {
   // ✅ 댓글 데이터 불러오기
   useEffect(() => {
     if (!projectId) return;
-    fetch(`http://localhost:4000/comments?projectId=${Number(projectId)}`)
+    fetch(`${API_BASE}/comments?projectId=${Number(projectId)}`)
       .then((res) => res.json())
       .then((data) => {
         const withDate = data.map((c) => ({
@@ -104,13 +115,13 @@ const CommentTask = ({ projectId, projectCompany }) => {
     const time = getFormattedTime();
     const createdAt = now.toISOString();
  
-    // 같은 회사면 "_us", 아니면 "_other"
+    // 내 댓글 "_us", 아니면 "_other"
     const type = currentUser.id === auth.userId ? "_us" : "_other";
 
     const baseData = {
       projectId: Number(projectId),
       userId: currentUser.id,
-      type,
+      //type, ()
       name: currentUser.userName,
       time,
       createdAt,
@@ -122,7 +133,7 @@ const CommentTask = ({ projectId, projectCompany }) => {
       // 파일 메시지
       if (selectedFile) {
         const fileData = { ...baseData, text: selectedFile.name, file: true };
-        const resFile = await fetch("http://localhost:4000/comments", {
+        const resFile = await fetch(`${API_BASE}/comments`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(fileData),
@@ -134,7 +145,7 @@ const CommentTask = ({ projectId, projectCompany }) => {
       // 텍스트 메시지
       if (newComment.trim()) {
         const textData = { ...baseData, text: newComment.trim() };
-        const resText = await fetch("http://localhost:4000/comments", {
+        const resText = await fetch(`${API_BASE}/comments`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(textData),
@@ -157,7 +168,7 @@ const CommentTask = ({ projectId, projectCompany }) => {
   const handleDelete = async (id) => {
     if (!window.confirm("정말 삭제하시겠습니까?")) return;
     try {
-      await fetch(`http://localhost:4000/comments/${id}`, { method: "DELETE" });
+      await fetch(`${API_BASE}/comments/${id}`, { method: "DELETE" });
       setComments((prev) => prev.filter((c) => c.id !== id));
       setActiveOption(null);
     } catch (err) {
@@ -247,7 +258,7 @@ const CommentTask = ({ projectId, projectCompany }) => {
                   nextMsg.time.slice(0, 8) === msg.time.slice(0, 8);
 
                 return (
-                  <div key={msg.id} className={`comment ${msg.type} ${sameSenderAsPrev ? "continued" : ""}`}>
+                  <div key={msg.id} className={`comment ${msg.userId === auth.userId ? "_us" : "_other"} ${sameSenderAsPrev ? "continued" : ""}`}>
                     {/* 프로필: 같은 사람이 같은 분에 연속으로 보냈다면 생략 */}
                     {!sameSenderAsPrev && (
                       <div className="profile">
@@ -273,7 +284,10 @@ const CommentTask = ({ projectId, projectCompany }) => {
                             {msg.text}
                           </p>
                         ) : (
-                          <p className="txt">{msg.text}</p>
+                          <p
+                            className="txt"
+                            dangerouslySetInnerHTML={{ __html: humanizeMentions(msg.text) }}
+                          />
                         )}
 
                         {/* 시간: 같은 분 내 마지막 메시지일 때만 표시 */}
@@ -294,13 +308,20 @@ const CommentTask = ({ projectId, projectCompany }) => {
 
       {/* 입력 영역 */}
       <div className="comment-input">
-        <div>
+
+        <Mentions
+          value={newComment}
+          onChange={setNewComment}
+          currentUser={currentUser}
+        />
+
+        {/* <div>
           <textarea
             placeholder="내용을 입력하세요."
             value={newComment}
             onChange={(e) => setNewComment(e.target.value)}
           ></textarea>
-        </div>
+        </div> */}
         <div className="control-box">
           <p className="file-name">{selectedFile ? selectedFile.name : ""}</p>
           <div>

@@ -1,6 +1,7 @@
 import "@components/feature/FileTask.css";
 import { useState, useEffect, useRef, useContext } from "react";
 import { UserDataContext } from "@/App";
+import { API_BASE } from "@/utils/env";
 
 const getFormattedDate = (isoDate) => {
   const date = new Date(isoDate);
@@ -30,7 +31,7 @@ const FileTask = ({ projectId }) => {
 // 파일 목록 불러오기
 useEffect(() => {
     if (!projectId) return;
-    fetch(`http://localhost:4000/comments?projectId=${projectId}`)
+    fetch(`${API_BASE}/comments?projectId=${projectId}`)
         .then((res) => res.json())
         .then((data) => {
         const fileOnly = data.filter((item) => item.file === true);
@@ -57,7 +58,7 @@ useEffect(() => {
       text: file.name,
     };
 
-    const res = await fetch("http://localhost:4000/comments", {
+    const res = await fetch(`${API_BASE}/comments`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(newFile),

@@ -2,6 +2,7 @@ import Select from "@components/common/Select";
 import { useState, useEffect, useContext } from "react";
 import { STATUS_OPTIONS_STYLESHIP, STATUS_OPTIONS_CUSTOMER  } from "@/utils/constants";
 import { UserDataContext } from "@/App";
+import { API_BASE } from "@/utils/env";
 
 const ProjectItem = ({ project, onClick, onBrandClick, isSelected }) => {
   const [status, setStatus] = useState("receipt");
@@ -19,7 +20,7 @@ const ProjectItem = ({ project, onClick, onBrandClick, isSelected }) => {
     setStatus(newStatus);
 
     // ✅ 선택 시 DB에 반영하고 싶다면 여기에 fetch/axios로 PATCH 요청 추가 가능
-    // fetch(`http://localhost:4000/projectList/${project.id}`, {
+    // fetch(`${API_BASE}/projectList/${project.id}`, {
     //   method: "PATCH",
     //   headers: { "Content-Type": "application/json" },
     //   body: JSON.stringify({ projectStatus: newStatus }),

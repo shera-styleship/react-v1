@@ -6,6 +6,7 @@ import Input from "@components/common/Input";
 import Alert from "@components/common/Alert";
 import { UserDataContext } from "@/App";
 import "./NewProject.css";
+import { API_BASE } from "@/utils/env";
 
 const NewProject = ({ alertType = true, onClose }) => {
   const { userData, auth, refreshProjects } = useContext(UserDataContext);
@@ -58,7 +59,7 @@ const NewProject = ({ alertType = true, onClose }) => {
     { value: "STYLESHIP", label: "STYLESHIP" },
   ];
 
-  const loginUser = userData.find((u) => u.id === auth.userId);
+  const loginUser = userData?.find((u) => u.id === auth.userId);
   const isStyleShipUser = loginUser?.userCompany === "STYLESHIP";
 
   // 로그인된 사용자 기준 기본값 세팅
@@ -97,7 +98,7 @@ const NewProject = ({ alertType = true, onClose }) => {
   // 프로젝트 번호 자동 증가
   const getNextProjectNo = async () => {
     try {
-      const res = await fetch("http://localhost:4000/projectList");
+      const res = await fetch(`${API_BASE}/projectList`);
       const data = await res.json();
       if (data.length === 0) return 10001;
       const maxNo = Math.max(...data.map((p) => Number(p.projectNo)));
@@ -105,6 +106,13 @@ const NewProject = ({ alertType = true, onClose }) => {
     } catch {
       return Math.floor(Math.random() * 90000) + 10000;
     }
+  };
+
+  // 기한
+  const formatDate = (dateStr) => {
+    if (!dateStr) return "기한 없음";
+    const date = new Date(dateStr);
+    return `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, "0")}-${String(date.getDate()).padStart(2, "0")}`;
   };
 
   const handleSubmit = async () => {
@@ -136,7 +144,7 @@ const NewProject = ({ alertType = true, onClose }) => {
         projectDeadline: form.endDate,
       };
 
-      const res = await fetch("http://localhost:4000/projectList", {
+      const res = await fetch(`${API_BASE}/projectList`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(newProject),
@@ -233,11 +241,7 @@ const NewProject = ({ alertType = true, onClose }) => {
                 <div className="_deadline">
                   <p className="txt">마감일</p>
                   <div>
-                    <p className="date">
-                      {form.endDate
-                        ? new Date(form.endDate).toLocaleDateString("ko-KR")
-                        : "기한 없음"}
-                    </p>
+                    <p className="date">{formatDate(form.endDate)}</p>
                     <input
                       type="date"
                       name="endDate"

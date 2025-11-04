@@ -76,6 +76,51 @@
       "userCompany": "STYLESHIP",
       "userTeam": "DV",
       "jobTitle": "과장"
+    },
+    {
+      "id": "7",
+      "userId": "test08",
+      "userPassword": "0000",
+      "userName": "이승경",
+      "userImage": "/images/profile01.jpg",
+      "userPhone": "010-0000-0000",
+      "userCompany": "STYLESHIP",
+      "userTeam": "UXI",
+      "jobTitle": "사원"
+    },
+    {
+      "id": "8",
+      "userId": "test09",
+      "userPassword": "0000",
+      "userName": "케즈네",
+      "userImage": "/images/profile01.jpg",
+      "userPhone": "010-0000-0000",
+      "userCompany": "미스토코리아(주)",
+      "userTeam": "KEDS",
+      "jobTitle": "사원"
+    },
+    {
+      "id": "9",
+      "userId": "test10",
+      "userPassword": "0000",
+      "userName": "테슽흐",
+      "userImage": "/images/profile01.jpg",
+      "userPhone": "010-0000-0000",
+      "userCompany": "미스토코리아(주)",
+      "userTeam": "KEDS",
+      "jobTitle": "대리"
+    },
+    {
+      "id": "99",
+      "userId": "test99",
+      "userPassword": "0000",
+      "userName": "관리자",
+      "userImage": "/images/profile01.jpg",
+      "userPhone": "010-0000-0000",
+      "userCompany": "STYLESHIP",
+      "userTeam": "DV",
+      "jobTitle": "과장",
+      "role": "ADMIN"
     }
   ],
   "projectList": [
@@ -372,6 +417,34 @@
       "createdAt": "2025-10-30T02:48:54.094Z",
       "text": "251023_푸퍼백.zip",
       "file": true
+    },
+    {
+      "id": "da64",
+      "projectId": 84750,
+      "userId": "0",
+      "type": "_us",
+      "name": "홍길동",
+      "time": "오전 10:38",
+      "createdAt": "2025-10-31T01:38:22.565Z",
+      "text": "@[강아지](1)  사원에게 멘션합니다."
+    },
+    {
+      "id": "d5bc",
+      "projectId": 84750,
+      "userId": "0",
+      "name": "홍길동",
+      "time": "오전 10:50",
+      "createdAt": "2025-10-31T01:50:49.133Z",
+      "text": "이제 댓글을 달아도 type 은 따로 저장이 되지 않습니다.\n확인."
+    },
+    {
+      "id": "cb91",
+      "projectId": 84750,
+      "userId": "8",
+      "name": "케즈네",
+      "time": "오전 11:52",
+      "createdAt": "2025-11-04T02:52:45.822Z",
+      "text": "@[김케즈](4)  확인~"
     }
   ]
 }
