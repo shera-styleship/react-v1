@@ -27,7 +27,6 @@ src/
  ├── mock/               # 임시 데이터(JSON)
  ├── hooks/              # 커스텀 훅
  ├── utils/              # 유틸 함수, 상수, API
- ├── config/             # 설정 데이터
  ├── assets/             # 이미지, 아이콘, 스타일
 ```
 
@@ -130,14 +129,11 @@ src/
 | `constants.js` | 공용 상수 정의 |
 | `getUserImageSrc.js` | 사용자 프로필 이미지 경로 반환 함수 |
 | `env.js` | 환경설정 |
+| `filterBarOptions.js` | 프로젝트 리스트 필터링 옵션(회사/브랜드) |
 
 ### 🗂️ 5. mock/ - 임시 데이터
 | 파일명 | 📝 설명 |
 |:--|:--|
 | `db.json` | 테스트용 임시 데이터(JSON) 파일 |
 
-### 🗂️ 6. config/ - 설정 데이터
-| 파일명 | 📝 설명 |
-|:--|:--|
-| `filterBarOptions.js` | 프로젝트 리스트 필터링 옵션(회사/브랜드) |
 

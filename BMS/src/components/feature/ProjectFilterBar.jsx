@@ -1,7 +1,7 @@
 import { useState } from "react";
 import Select from "@components/common/Select";
 import Input from "@components/common/Input";
-import {filterBarOptions} from "@config/filterBarOptions"
+import {filterBarOptions} from "@/utils/filterBarOptions"
 
 const ProjectFilterBar = ({ filters, setFilters, onFilter }) => {
   const handleSelect = (e) => {

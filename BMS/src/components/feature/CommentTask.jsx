@@ -1,5 +1,5 @@
 import "@components/feature/CommentTask.css";
-import { useState, useEffect, useRef, useContext } from "react";
+import { useState, useEffect, useRef, useContext, useMemo } from "react";
 import { UserDataContext } from "@/App";
 import Mentions from "@components/feature/Mentions.jsx";
 import { API_BASE } from "@/utils/env";
@@ -18,11 +18,11 @@ const getFormattedDate = (isoDate) => {
 };
 
 // ✅ 시간 포맷팅 (오전/오후 HH:mm)
-const getFormattedTime = () => {
-  const now = new Date();
-  const hours = now.getHours();
-  const minutes = String(now.getMinutes()).padStart(2, "0");
-  return `${hours > 12 ? "오후" : "오전"} ${hours % 12 || 12}:${minutes}`;
+const getFormattedTime = (isoDate) => {
+  const date = new Date(isoDate);
+  const hours = date.getHours();
+  const minutes = String(date.getMinutes()).padStart(2, "0");
+  return `${hours >= 12 ? "오후" : "오전"} ${hours % 12 || 12}:${minutes}`;
 };
 
 // ✅ 멘션 포맷을 HTML로 변환
@@ -49,22 +49,26 @@ const CommentTask = ({ projectId, projectCompany }) => {
   const optionRef = useRef(null);
   const fileInputRef = useRef(null);
 
+  // ✅ userMap 캐싱 (id → 사용자 정보)
+  const userMap = useMemo(() => {
+    return Object.fromEntries(userData.map((u) => [u.id, u]));
+  }, [userData]);
+
   // ✅ 댓글 데이터 불러오기
   useEffect(() => {
     if (!projectId) return;
-    fetch(`${API_BASE}/comments?projectId=${Number(projectId)}`)
+    fetch(`${API_BASE}/comments?projectId=${String(projectId)}`)
       .then((res) => res.json())
       .then((data) => {
         const withDate = data.map((c) => ({
           ...c,
           createdAt: c.createdAt || new Date().toISOString(),
-          type: c.userId === auth.userId ? "_us" : "_other",
         }));
         setComments(withDate);
       })
       .catch((err) => console.error("코멘트 로드 실패:", err))
       .finally(() => setLoading(false));
-  }, [projectId, auth.userId]);
+  }, [projectId]);
 
   // ✅ 스크롤 항상 맨 아래로
   useEffect(() => {
@@ -111,19 +115,12 @@ const CommentTask = ({ projectId, projectCompany }) => {
     }
     if ((!newComment.trim() && !selectedFile) || isSubmitting) return;
 
-    const now = new Date();
-    const time = getFormattedTime();
-    const createdAt = now.toISOString();
- 
-    // 내 댓글 "_us", 아니면 "_other"
-    const type = currentUser.id === auth.userId ? "_us" : "_other";
+    const createdAt = new Date().toISOString();
 
+    // ✅ DB에 저장할 최소 데이터 구조
     const baseData = {
-      projectId: Number(projectId),
+      projectId: String(projectId),
       userId: currentUser.id,
-      //type, ()
-      name: currentUser.userName,
-      time,
       createdAt,
     };
 
@@ -194,7 +191,8 @@ const CommentTask = ({ projectId, projectCompany }) => {
     acc[dateKey].push(comment);
     return acc;
   }, {});
-    const sortedDates = Object.keys(groupedByDate).sort((a, b) => new Date(a.split(" ")[0]) - new Date(b.split(" ")[0])
+  const sortedDates = Object.keys(groupedByDate).sort(
+    (a, b) => new Date(a.split(" ")[0]) - new Date(b.split(" ")[0])
   );
 
   // ✅ 우클릭 메뉴 렌더링 (마우스 근처)
@@ -202,7 +200,8 @@ const CommentTask = ({ projectId, projectCompany }) => {
     if (!activeOption) return null;
     const { id, x, y } = activeOption;
     const comment = comments.find((c) => c.id === id);
-    if (!comment || comment.type !== "_us") return null;
+    const isMine = comment?.userId === auth.userId;
+    if (!comment || !isMine) return null;
 
     const offsetX = 10;
     const offsetY = 10;
@@ -244,37 +243,50 @@ const CommentTask = ({ projectId, projectCompany }) => {
               {groupedByDate[date].map((msg, idx, arr) => {
                 const prevMsg = arr[idx - 1];
                 const nextMsg = arr[idx + 1];
+                const isMine = msg.userId === auth.userId;
 
-                // 이전 메시지와 같은 사람 + 같은 시간(분 단위)인지 체크
+                // 이전/다음 메시지와 같은 사용자 + 같은 분 단위 시간 비교
                 const sameSenderAsPrev =
                   prevMsg &&
                   prevMsg.userId === msg.userId &&
-                  prevMsg.time.slice(0, 8) === msg.time.slice(0, 8);
-
-                // 다음 메시지와 같은 사람 + 같은 시간(분 단위)인지 체크
+                  getFormattedTime(prevMsg.createdAt) ===
+                    getFormattedTime(msg.createdAt);
                 const sameSenderAsNext =
                   nextMsg &&
                   nextMsg.userId === msg.userId &&
-                  nextMsg.time.slice(0, 8) === msg.time.slice(0, 8);
+                  getFormattedTime(nextMsg.createdAt) ===
+                    getFormattedTime(msg.createdAt);
 
                 return (
-                  <div key={msg.id} className={`comment ${msg.userId === auth.userId ? "_us" : "_other"} ${sameSenderAsPrev ? "continued" : ""}`}>
+                  <div
+                    key={msg.id}
+                    className={`comment ${isMine ? "_us" : "_other"} ${
+                      sameSenderAsPrev ? "continued" : ""
+                    }`}
+                  >
                     {/* 프로필: 같은 사람이 같은 분에 연속으로 보냈다면 생략 */}
                     {!sameSenderAsPrev && (
                       <div className="profile">
-                        <img src={userData.find((u) => u.id === msg.userId)?.userImage || "/default.png"} alt="" />
+                        <img
+                          src={
+                            userMap[msg.userId]?.userImage || "/default.png"
+                          }
+                          alt={userMap[msg.userId]?.userName || ""}
+                        />
                       </div>
                     )}
 
                     <div className="msg-box">
                       {/* 이름: 같은 사람이 같은 분에 연속으로 보냈다면 생략 */}
-                      {!sameSenderAsPrev && <p className="user-name">{msg.name}</p>}
+                      {!sameSenderAsPrev && (
+                        <p className="user-name">
+                          {userMap[msg.userId]?.userName || "알 수 없음"}
+                        </p>
+                      )}
 
                       <div
                         className="msg"
-                        onContextMenu={(e) =>
-                          handleRightClick(e, msg.id, msg.type === "_us")
-                        }
+                        onContextMenu={(e) => handleRightClick(e, msg.id, isMine)}
                       >
                         {msg.file ? (
                           <p
@@ -286,12 +298,18 @@ const CommentTask = ({ projectId, projectCompany }) => {
                         ) : (
                           <p
                             className="txt"
-                            dangerouslySetInnerHTML={{ __html: humanizeMentions(msg.text) }}
+                            dangerouslySetInnerHTML={{
+                              __html: humanizeMentions(msg.text),
+                            }}
                           />
                         )}
 
                         {/* 시간: 같은 분 내 마지막 메시지일 때만 표시 */}
-                        {!sameSenderAsNext && <p className="time">{msg.time}</p>}
+                        {!sameSenderAsNext && (
+                          <p className="time">
+                            {getFormattedTime(msg.createdAt)}
+                          </p>
+                        )}
                       </div>
                     </div>
                   </div>
@@ -308,20 +326,11 @@ const CommentTask = ({ projectId, projectCompany }) => {
 
       {/* 입력 영역 */}
       <div className="comment-input">
-
         <Mentions
           value={newComment}
           onChange={setNewComment}
           currentUser={currentUser}
         />
-
-        {/* <div>
-          <textarea
-            placeholder="내용을 입력하세요."
-            value={newComment}
-            onChange={(e) => setNewComment(e.target.value)}
-          ></textarea>
-        </div> */}
         <div className="control-box">
           <p className="file-name">{selectedFile ? selectedFile.name : ""}</p>
           <div>
@@ -338,10 +347,7 @@ const CommentTask = ({ projectId, projectCompany }) => {
               style={{ display: "none" }}
               onChange={handleFileChange}
             />
-            <button
-              type="button"
-              className="set-manager__btn"
-            >
+            <button type="button" className="set-manager__btn">
               작업 위임
             </button>
             <button
