@@ -51,7 +51,8 @@
 | `id`        | string               | 코멘트 구분을 위한 고유값              | `"0b03"`                     |
 | `projectId` | string               | 코멘트가 속한 프로젝트의 ID                           | `"84750"`                    |
 | `userId`    | string               | 코멘트를 작성한 사용자 ID (`userInfo`의 `id`)            | `"0"`                        |
-| `text`      | string               | 코멘트 내용. 멘션 포함 시 @[강아지](1) 형태로 저장  |                              |
+| `text`      | string               | 코멘트 내용. 멘션 포함 시 @[홍길동](0) 형태로 저장  |                              |
 | `file`      | boolean *(optional)* | 파일 첨부 여부 (`true`일 경우 `text`에 파일명 저장)            | `true`                       |
 | `createdAt` | string               | 작성 시각 (ISO 8601 형식)                              | `"2025-11-04T08:20:08.203Z"` |
+
 
