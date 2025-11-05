@@ -30,22 +30,12 @@
 | projectStatus   | string | 상태값 (`receipt`, `progress`, `hold`, `completion`, `cancel`) | `"completion"`                                |
 | projectDeadline | string | 마감일 (YYYY-MM-DD)                                            | `"2025-10-20"`                                |
 | projectContent  | string | 상세 내용                                                       | `"라이카 카메라 코리아 기획전 제작 요청드립니다."`                |
-| projectTeam     | string | 담당 팀명                                                       | `"SR"`                                        |
+| projectTeam | string[] | 담당 팀명 배열 <br>기존 단일 문자열(`"SR"`) → 다중 값 배열로 변경됨 | `["DV", "SR"]` |
+| projectManager | string[] | 프로젝트 담당자 ID 목록  | `["test02", "test99"]` |
 
 <br>
 
-## 3. mockAlarms (임시 알림 리스트)
-| 필드명              | 타입                   | 설명                                  | 예시                                               |
-| :--------------- | :------------------- | :---------------------------------- | :----------------------------------------------- |
-| `id`             | number               | 각 알림을 구분하기 위한 고유값                   | `1`                                              |
-| `projectName`    | string               | 관련 프로젝트명 또는 제목                      | `"○ 8월 수배송 공지"`                                  |
-| `projectCompany` | string               | 고객사명 또는 브랜드명                        | `"NPLUS(네파)"`                                    |
-| `writer`         | string               | 알림을 생성한 작성자 이름                      | `"홍길동"`                                          |
-| `message`        | string               | 알림 본문 내용                            | `"수배송 공지 시안 제작 부탁드립니다~! 시안 확정 시 psd 공유 부탁드립니다."` |
-| `createdAt`      | string               | 알림 생성 시각 (ISO 8601 형식, KST 포함)      | `"2025-10-24T09:34:00+09:00"`                    |
-| `deleted`        | boolean *(optional)* | 삭제 여부 (`true`: 삭제됨, `false`: 활성 상태) | `false`                                          |
-
-## 4. comments (임시 댓글 리스트)
+## 3. comments (임시 댓글 리스트)
 | 필드명         | 타입                   | 설명                                               | 예시                           |
 | :---------- | :------------------- | :----------------------------------------------- | :--------------------------- |
 | `id`        | string               | 코멘트 구분을 위한 고유값              | `"0b03"`                     |

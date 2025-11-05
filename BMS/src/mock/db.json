@@ -121,6 +121,28 @@
       "userTeam": "DV",
       "jobTitle": "과장",
       "role": "ADMIN"
+    },
+    {
+      "id": "11",
+      "userId": "test11",
+      "userPassword": "0000",
+      "userName": "스마트",
+      "userImage": "/images/profile01.jpg",
+      "userPhone": "010-0000-0000",
+      "userCompany": "STYLESHIP",
+      "userTeam": "스마트라이즈",
+      "jobTitle": "과장"
+    },
+    {
+      "id": "12",
+      "userId": "test12",
+      "userPassword": "0000",
+      "userName": "고양이",
+      "userImage": "/images/profile01.jpg",
+      "userPhone": "010-0000-0000",
+      "userCompany": "STYLESHIP",
+      "userTeam": "O2O",
+      "jobTitle": "사원"
     }
   ],
   "projectList": [
@@ -136,7 +158,12 @@
       "projectStatus": "completion",
       "projectDeadline": "2025-10-20",
       "projectContent": "안녕하세요, 라이카 카메라 코리아 기획전 제작 요청드립니다.",
-      "projectTeam": "SR"
+      "projectTeam": [
+        "SR"
+      ],
+      "projectManager": [
+        "test01"
+      ]
     },
     {
       "id": "1",
@@ -150,7 +177,12 @@
       "projectStatus": "receipt",
       "projectDeadline": "2025-10-20",
       "projectContent": "안녕하세요, 라이카 카메라 코리아 기획전 제작 요청드립니다.",
-      "projectTeam": "UXI"
+      "projectTeam": [
+        "UXI"
+      ],
+      "projectManager": [
+        "test01"
+      ]
     },
     {
       "id": "2",
@@ -164,7 +196,12 @@
       "projectStatus": "cancel",
       "projectDeadline": "2025-10-20",
       "projectContent": "안녕하세요, 라이카 카메라 코리아 기획전 제작 요청드립니다.",
-      "projectTeam": "CR"
+      "projectTeam": [
+        "UXI"
+      ],
+      "projectManager": [
+        "test01"
+      ]
     },
     {
       "id": "3",
@@ -178,7 +215,12 @@
       "projectStatus": "progress",
       "projectDeadline": "2025-10-20",
       "projectContent": "안녕하세요, 라이카 카메라 코리아 기획전 제작 요청드립니다.",
-      "projectTeam": "DEV"
+      "projectTeam": [
+        "CR"
+      ],
+      "projectManager": [
+        "test03"
+      ]
     },
     {
       "id": "4",
@@ -192,21 +234,31 @@
       "projectStatus": "hold",
       "projectDeadline": "2025-10-20",
       "projectContent": "안녕하세요, 라이카 카메라 코리아 기획전 제작 요청드립니다.",
-      "projectTeam": "CR"
+      "projectTeam": [
+        "CR"
+      ],
+      "projectManager": [
+        "test02"
+      ]
     },
     {
       "id": "1760926380316",
       "projectNo": 84744,
       "projectDate": "2025-10-20",
       "projectStatus": "receipt",
-      "projectTeam": "CR",
       "writer": "강아지",
       "projectCompany": "STYLESHIP",
       "projectBrand": "FILA",
       "projectSort": "프로모션",
       "projectTitle": "프로젝트 생성 테스트",
       "projectContent": "프로모션 생성 테스트입니다.",
-      "projectDeadline": "2025-10-30"
+      "projectDeadline": "2025-10-30",
+      "projectTeam": [
+        "CR"
+      ],
+      "projectManager": [
+        "test04"
+      ]
     },
     {
       "id": "1760942585880",
@@ -227,27 +279,87 @@
       "projectNo": 84746,
       "projectDate": "2025-10-28",
       "projectStatus": "receipt",
-      "projectTeam": "CR",
       "writer": "홍길동",
       "projectCompany": "NPLUS(네파)",
       "projectBrand": "NEPA",
       "projectSort": "기획전",
       "projectTitle": "ㅇㅇ",
       "projectContent": "신규 프로젝트 확인입니다. ",
-      "projectDeadline": ""
+      "projectDeadline": "",
+      "projectTeam": [
+        "CR",
+        "DV",
+        "UIX"
+      ],
+      "projectManager": [
+        "test01",
+        "test07",
+        "test02",
+        "test08"
+      ]
     },
     {
       "id": "1761724296366",
       "projectNo": 84750,
       "projectDate": "2025-10-29T07:51:36.366Z",
       "projectStatus": "receipt",
-      "projectTeam": "CR",
       "writer": "홍길동",
       "projectCompany": "NPLUS(네파)",
       "projectBrand": "NEPA",
       "projectSort": "기능 수정/추가",
       "projectTitle": "nEW 테슽 ... ㅡㅌ... ",
       "projectContent": "TEST\nTESTTEST\nTEST\nTEST\nTEST\nTEST\nTEST\nTEST\nTEST",
+      "projectDeadline": "",
+      "projectTeam": [
+        "CR",
+        "스마트라이즈",
+        "O2O"
+      ],
+      "projectManager": [
+        "test01",
+        "test02",
+        "test12",
+        "test11"
+      ]
+    },
+    {
+      "id": "1762307940371",
+      "projectNo": 84751,
+      "projectDate": "2025-11-05T01:59:00.371Z",
+      "projectStatus": "receipt",
+      "projectTeam": [
+        "UIX"
+      ],
+      "projectManager": [
+        "0",
+        "test06"
+      ],
+      "writer": "홍길동",
+      "projectCompany": "NPLUS(네파)",
+      "projectBrand": "NEPA",
+      "projectSort": "프로모션",
+      "projectTitle": "네파 테스트 입니다",
+      "projectContent": "네파파",
+      "projectDeadline": ""
+    },
+    {
+      "id": "1762307971101",
+      "projectNo": 84752,
+      "projectDate": "2025-11-05T01:59:31.101Z",
+      "projectStatus": "receipt",
+      "projectTeam": [
+        "DV"
+      ],
+      "projectManager": [
+        "2",
+        "test99"
+      ],
+      "writer": "임꺽정",
+      "projectCompany": "미스토코리아(주)",
+      "projectBrand": "FILA",
+      "projectSort": "기획전",
+      "projectTitle": "휠라 테스트 입니다",
+      "projectContent": "휠랄라",
       "projectDeadline": ""
     }
   ],
@@ -339,6 +451,14 @@
       "userId": "99",
       "createdAt": "2025-11-04T08:37:44.524Z",
       "text": "파일모아보기에서 올린 파일도 코멘트 등록 됩니다."
+    },
+    {
+      "id": "99e4",
+      "projectId": "84750",
+      "userId": "0",
+      "file": true,
+      "text": "d_251021_coco_05.jpg",
+      "createdAt": "2025-11-05T01:09:15.156Z"
     }
   ]
 }
