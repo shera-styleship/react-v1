@@ -12,3 +12,64 @@
   box-sizing: border-box;
 }
 /* //Project */
+
+/* 로딩 중에는 '조건에 맞는...' 문구 숨기기 */
+.ProjectList.is-loading .item__list .no-txt {
+  display: none;
+}
+
+/* 스켈레톤 공통 스타일 */
+.skeleton-block {
+  position: relative;
+  overflow: hidden;
+  border-radius: 6px;
+  background: #f3f3f3;
+}
+
+/* 각 컬럼에 맞게 높이/폭만 살짝 조정 */
+.ProjectItem--skeleton .date.skeleton-block,
+.ProjectItem--skeleton .number.skeleton-block,
+.ProjectItem--skeleton .type.skeleton-block,
+.ProjectItem--skeleton .status.skeleton-block {
+  height: 14px;
+}
+
+.ProjectItem--skeleton .brand.skeleton-block {
+  height: 14px;
+  width: 80%;
+}
+
+.ProjectItem--skeleton .title.skeleton-block {
+  height: 14px;
+  width: 90%;
+}
+
+/* 반짝이는 애니메이션 */
+.skeleton-block::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  transform: translateX(-100%);
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.7) 50%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  animation: skeleton-shimmer 1.2s infinite;
+}
+
+@keyframes skeleton-shimmer {
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+/* 스켈레톤일 때 hover 효과 제거 */
+.ProjectItem--skeleton {
+  pointer-events: none;
+}
+.ProjectItem--skeleton:hover {
+  background-color: transparent;
+  transform: none;
+}

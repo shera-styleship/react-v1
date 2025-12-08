@@ -1,7 +1,6 @@
 import { useState } from "react";
 import Select from "@components/common/Select";
 import Input from "@components/common/Input";
-import {filterBarOptions} from "@/utils/filterBarOptions"
 
 const ProjectFilterBar = ({ filters, setFilters, onFilter }) => {
   const handleSelect = (e) => {
@@ -35,11 +34,42 @@ const ProjectFilterBar = ({ filters, setFilters, onFilter }) => {
     onFilter(filters, true);
   };
 
+  const selectOptions = [
+    {
+      name: "company",
+      options: [
+        { value: "", label: "Company" },
+        { value: "all", label: "All" },
+        { value: "NPLUS(네파)", label: "NPLUS(네파)" },
+        { value: "미스토코리아(주)", label: "미스토코리아(주)" },
+      ],
+    },
+    {
+      name: "brand",
+      options: [
+        { value: "", label: "Brand" },
+        { value: "all", label: "All" },
+        { value: "NEPA", label: "NEPA" },
+        { value: "FILA", label: "FILA" },
+      ],
+    },
+    {
+      name: "team",
+      options: [
+        { value: "", label: "All" },
+        { value: "cr", label: "CR" },
+        { value: "dv", label: "DV" },
+        { value: "uxi", label: "UXI" },
+        { value: "sr", label: "SR" },
+      ],
+    },
+  ];
+
   return (
     <div className="ProjectFilterBar">
       <div>
         <div className="select-box">
-          {filterBarOptions.map(({ name, options }) => (
+          {selectOptions.map(({ name, options }) => (
             <Select
               key={name}
               name={name}
