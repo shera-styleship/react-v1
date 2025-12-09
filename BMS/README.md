@@ -1,18 +1,37 @@
 # BMS
 
 ```html
-전체 다운로드 하고, 터미널에서 npm install
+버전 변경
+npm list react
+
+19.1.2 로 변경
+npm install react@19.1.2 react-dom@19.1.2
+```
+
+```html
+전체 다운로드 하고, 터미널에서 각각,
+npm install
+-- 악시오스 설치 ( API 통신용 )
+npm install axios
 npm run dev
 ```
 
 ```html
-터미널 1개 더 열어서 npm i -g json-server
+API 테스트 Page 
+https://bmsapi.styleship.com/swagger/index.html
+```
+
+```html
+터미널 1개 더 열어서 각각,
+npm i -g json-server
 json-server --watch src/mock/db.json --port 4000
 ```
 
 **테스트 아이디**
 
-- test01/1234
-- test02/5678 (소속 styleship)
-- test03/0000
+- bms본인 계정
+- 롯데홈쇼핑용 company / test1234
+
+
+
 
