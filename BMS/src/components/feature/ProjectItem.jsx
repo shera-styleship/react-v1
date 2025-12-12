@@ -8,29 +8,28 @@ import {
 import { UserDataContext } from "@/App";
 
 const ProjectItem = ({ project, onClick, onBrandClick, isSelected }) => {
-  const [status, setStatus] = useState("receipt");
   const { auth, userData } = useContext(UserDataContext);
-  const currentUser = userData.find((u) => u.userId === auth.userId);
+
+  const currentUser =
+    (userData || []).find((u) => String(u.userId) === String(auth?.userId)) ||
+    null;
   const isStyleship = currentUser?.userCompany === "STYLESHIP";
 
+  // 🔹 상태값: workStatus 기준
+  const [status, setStatus] = useState(project.workStatus || "receipt");
+
   useEffect(() => {
-    setStatus(project.projectStatus || project.status || "receipt");
+    setStatus(project.workStatus || "receipt");
   }, [project]);
 
   const handleStatusChange = (e) => {
     const newStatus = e.target.value;
     setStatus(newStatus);
-    // TODO: 상태 변경 API 연동 시 여기서 PATCH 호출
+    // TODO: 상태 변경 API 연동(PATCH) 위치
   };
 
-  // 🔹 날짜 필드 (등록일)
-  const createdDate =
-    project.workRegdate ||
-    project.projectDate ||
-    project.regDate ||
-    project.createdAt ||
-    null;
-
+  // 🔹 등록일
+  const createdDate = project.workRegdate || null;
   const isNew = (() => {
     if (!createdDate) return false;
     const created = new Date(createdDate);
@@ -40,22 +39,13 @@ const ProjectItem = ({ project, onClick, onBrandClick, isSelected }) => {
     return diff < oneDay;
   })();
 
-  // 🔹 표시용 필드 매핑
-  const brand = project.projectName || project.projectBrand || "";
-  const sort =
-    project.workCategory ||
-    project.projectSort ||
-    project.category ||
-    project.workType ||
-    "";
-  const title =
-    project.workTitle || project.projectTitle || project.title || "";
-  const team = Array.isArray(project.projectTeam)
-    ? project.projectTeam
-    : project.projectTeam ||
-      project.team ||
-      (project.workTeam && [String(project.workTeam).replace(/"/g, "")]) ||
-      [];
+  // 🔹 표시용 필드 매핑 (이번 API 스펙 기준으로만)
+  const brand = project.projectName || project.projectCompany || "";
+  const sort = project.workCategory || "";
+  const title = project.workTitle || "";
+  const team = project.workTeam
+    ? [String(project.workTeam).replace(/"/g, "")]
+    : [];
 
   return (
     <div className={`ProjectItem ${isSelected ? "_selected" : ""}`}>
@@ -71,8 +61,8 @@ const ProjectItem = ({ project, onClick, onBrandClick, isSelected }) => {
           : ""}
       </p>
 
-      {/* 번호: workNo 우선, 없으면 projectNo */}
-      <p className="number">{project.workNo ?? project.projectNo}</p>
+      {/* 번호: workNo */}
+      <p className="number">{project.workNo}</p>
 
       {/* 브랜드 */}
       <p className="brand" onClick={onBrandClick}>
@@ -85,18 +75,14 @@ const ProjectItem = ({ project, onClick, onBrandClick, isSelected }) => {
       {/* 제목 + 팀 + 신규 표시 */}
       <p className="title" onClick={onClick}>
         {title}
-        {Array.isArray(team) ? (
-          team.map(
-            (t, idx) =>
-              t && (
-                <span key={idx} className="tag">
-                  {t}
-                </span>
-              )
-          )
-        ) : team ? (
-          <span className="tag">{team}</span>
-        ) : null}
+        {team.map(
+          (t, idx) =>
+            t && (
+              <span key={idx} className="tag">
+                {t}
+              </span>
+            )
+        )}
         <span className="tag">@</span>
         {isNew && <span className="tag new">N</span>}
       </p>
@@ -115,7 +101,7 @@ const ProjectItem = ({ project, onClick, onBrandClick, isSelected }) => {
   );
 };
 
-// 🔥 React.memo: project 객체 참조 & isSelected 같으면 리렌더 안 함
+// 🔥 project 참조 & isSelected 같으면 리렌더 안 함
 export default React.memo(ProjectItem, (prevProps, nextProps) => {
   return (
     prevProps.project === nextProps.project &&
