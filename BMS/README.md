@@ -13,6 +13,7 @@ npm install react@19.1.2 react-dom@19.1.2
 npm install
 -- 악시오스 설치 ( API 통신용 )
 npm install axios
+npm i react-mentions
 npm run dev
 ```
 
@@ -24,13 +25,14 @@ https://bmsapi.styleship.com/swagger/index.html
 ```html
 터미널 1개 더 열어서 각각,
 npm i -g json-server
-json-server --watch src/mock/db.json --port 4000
+json-server --watch src/mock/db.json --port 4000 (*임시 데이터 - 코멘트, 멘션 확인용)
 ```
 
 **테스트 아이디**
 
 - bms본인 계정
 - 롯데홈쇼핑용 company / test1234
+
 
 
 
