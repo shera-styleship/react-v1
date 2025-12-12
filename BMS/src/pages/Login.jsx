@@ -1,6 +1,7 @@
+// src/pages/Login.jsx
 import "@/pages/Login.css";
 import { useState, useContext, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import Input from "@/components/common/Input";
 import Button from "@/components/common/Button";
 import Alert from "@/components/common/Alert";
@@ -13,9 +14,15 @@ import axios from "axios";
 const STORAGE_KEY = "remembered_username";
 const TOKEN_KEY = "bms_token"; // JWT 저장용
 const MEMBER_KEY = "bms_member";
+const EXPIRES_AT = "expires_at";
 
 const Login = () => {
   const nav = useNavigate();
+  const location = useLocation();
+
+  // 🔹 RequireAuth에서 전달한 "원래 가려던 경로"
+  const from = location.state?.from?.pathname || "/";
+
   const [loginId, setLoginId] = useState("");
   const [loginPw, setLoginPw] = useState("");
   const [rememberId, setRememberId] = useState(false);
@@ -64,16 +71,22 @@ const Login = () => {
       // 토큰 및 회원정보 저장
       localStorage.setItem(TOKEN_KEY, token);
       localStorage.setItem(MEMBER_KEY, JSON.stringify(member));
+      localStorage.setItem(EXPIRES_AT, Date.now() + 1000 * 60 * 30); // 30분 뒤 만료
 
       // 아이디 저장 처리
       if (rememberId) localStorage.setItem(STORAGE_KEY, id);
       else localStorage.removeItem(STORAGE_KEY);
 
       // 전역 로그인 처리
-      if (login) login(member);
+      if (login) {
+        // login 함수 정의가 login(id) 이므로, member 전체 대신 id/키를 넘길지
+        // 이미 기존 로직을 그대로 쓰고 싶다면 아래 둘 중 골라:
+        // login(member.memberID);
+        login(member); // ← 기존 코드 유지
+      }
 
-      // 메인 이동
-      nav("/");
+      // ✅ 메인 이동 (무조건 "/"가 아니라 원래 가려던 곳으로!)
+      nav(from, { replace: true });
     } catch (err) {
       if (err.response?.status === 401) {
         openAlert("아이디 또는 비밀번호가 올바르지 않습니다.");

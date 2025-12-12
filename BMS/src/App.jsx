@@ -23,17 +23,28 @@ export const UserDispatchContext = createContext();
 
 // 로그인 안되어 있을 경우 /login 으로 이동
 function RequireAuth() {
-  const { auth } = useContext(UserDataContext);
+  const { auth, authInitialized } = useContext(UserDataContext);
   const location = useLocation();
+
+  // ✅ 아직 로컬스토리지 체크 중이면 아무것도 하지 않기
+  if (!authInitialized) {
+    return null; // 필요하면 스피너 같은 로딩 컴포넌트 넣어도 됨
+  }
+
   if (!auth?.isLoggedIn) {
-    return <Navigate to="/Login" replace state={{ from: location }} />;
+    return <Navigate to="/login" replace state={{ from: location }} />;
   }
   return <Outlet />;
 }
 
 // 로그인 되어 있을 경우 / 홈으로 이동
 function RequireGuest() {
-  const { auth } = useContext(UserDataContext);
+  const { auth, authInitialized } = useContext(UserDataContext);
+
+  if (!authInitialized) {
+    return null;
+  }
+
   if (auth?.isLoggedIn) {
     return <Navigate to="/" replace />;
   }
@@ -42,7 +53,10 @@ function RequireGuest() {
 
 function App() {
   const [userData, setUserData] = useState([]); // 서버의 사용자 목록
+
   const [auth, setAuth] = useState({ isLoggedIn: false, userId: null });
+  const [authInitialized, setAuthInitialized] = useState(false); // 🔥 추가
+
   const [alertState, setAlertState] = useState("");
 
   // 프로젝트 갱신 관련 상태
@@ -55,49 +69,52 @@ function App() {
   useEffect(() => {
     const token = localStorage.getItem("bms_token");
     const member = localStorage.getItem("bms_member");
+    const expiresAt = localStorage.getItem("expires_at");
 
-    if (token && member) {
-      const user = JSON.parse(member);
-      setAuth({
-        isLoggedIn: true,
-        userId: user.memberID,
-      });
-    }
-  }, []);
+    // 기본값
+    let nextAuth = { isLoggedIn: false, userId: null };
 
-  // (기존 useEffect 내부)
-  /*
-  useEffect(() => {
-    (async () => {
+    if (token && member && expiresAt && Date.now() <= Number(expiresAt)) {
       try {
-        const res = await fetch(`${API_BASE}/userInfo`);
-        if (!res.ok) throw new Error("Failed to load users");
-        const list = await res.json();
-        setUserData(list);
+        const user = JSON.parse(member);
+        nextAuth = {
+          isLoggedIn: true,
+          userId: user.memberID,
+        };
       } catch (e) {
-        console.error(e);
+        console.error("member 파싱 실패:", e);
       }
-    })();
-  }, []);
-    */
+    } else {
+      // 만료 또는 누락 → 깔끔히 정리
+      localStorage.removeItem("bms_token");
+      localStorage.removeItem("bms_member");
+      localStorage.removeItem("expires_at");
+    }
 
-  // 로그인/로그아웃만 디스패치 컨텍스트로 제공
-  const login = (id) => setAuth({ isLoggedIn: true, userId: id });
+    setAuth(nextAuth);
+    setAuthInitialized(true); // 🔥 로컬스토리지 체크 끝!
+  }, []);
+
+  const login = (id) => {
+    setAuth({ isLoggedIn: true, userId: id });
+    setAuthInitialized(true);
+  };
+
   const logout = () => {
-    // 1. 로컬스토리지 삭제
     localStorage.removeItem("bms_token");
     localStorage.removeItem("bms_member");
-
-    // 2. React 인증 상태 초기화
+    localStorage.removeItem("expires_at");
     setAuth({ isLoggedIn: false, userId: null });
+    setAuthInitialized(true);
   };
 
   return (
     <UserDataContext.Provider
       value={{
-        userData, // 목록 조회용
-        setUserData, // 필요 시 다른 페이지에서 갱신할 수 있게 노출(선택)
+        userData,
+        setUserData,
         auth,
+        authInitialized, // 🔥 컨텍스트로 전달
         alertState,
         handleAlertBtn,
         projectRefresh,
@@ -116,11 +133,16 @@ function App() {
           {/* 로그인 필요: 메인 앱 */}
           <Route element={<RequireAuth />}>
             <Route element={<AppLayout />}>
+              {/* 기본 진입 = 프로젝트 */}
               <Route index element={<Project />} />
               <Route path="/" element={<Project />} />
+
               <Route path="/logout" element={<Logout />} />
-              <Route path="/Project" element={<Project />} />
-              <Route path="/Project/:projectNo" element={<Project />} />
+
+              {/* 🔥 project 라우트 (소문자) */}
+              <Route path="/project" element={<Project />} />
+              <Route path="/project/:projectNo" element={<Project />} />
+
               <Route path="/MyProject" element={<MyProject />} />
               <Route path="/Schedule" element={<Schedule />} />
               <Route path="/Knowledge" element={<Knowledge />} />
