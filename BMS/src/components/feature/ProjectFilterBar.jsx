@@ -1,9 +1,18 @@
-import { useState } from "react";
+// src/components/feature/ProjectFilterBar.jsx
 import Select from "@components/common/Select";
 import Input from "@components/common/Input";
-import {filterBarOptions} from "@/utils/filterBarOptions"
+import { filterBarOptions } from "@/utils/filterBarOptions";
 
-const ProjectFilterBar = ({ filters, setFilters, onFilter }) => {
+const ProjectFilterBar = ({
+  filters,
+  setFilters,
+  onFilter,
+  companyOptions,
+  brandOptions,
+  searchInput,
+  setSearchInput,
+  onSearch,
+}) => {
   const handleSelect = (e) => {
     const { name, value } = e.target;
     const newFilters = { ...filters, [name]: value };
@@ -35,11 +44,34 @@ const ProjectFilterBar = ({ filters, setFilters, onFilter }) => {
     onFilter(filters, true);
   };
 
+  // ✅ company / brand 옵션을 API 결과로 교체
+  const mergedOptions = filterBarOptions.map((item) => {
+    if (
+      item.name === "company" &&
+      companyOptions &&
+      companyOptions.length > 0
+    ) {
+      return {
+        ...item,
+        options: companyOptions,
+      };
+    }
+
+    if (item.name === "brand" && brandOptions && brandOptions.length > 0) {
+      return {
+        ...item,
+        options: brandOptions,
+      };
+    }
+
+    return item;
+  });
+
   return (
     <div className="ProjectFilterBar">
       <div>
         <div className="select-box">
-          {filterBarOptions.map(({ name, options }) => (
+          {mergedOptions.map(({ name, options }) => (
             <Select
               key={name}
               name={name}
@@ -52,16 +84,14 @@ const ProjectFilterBar = ({ filters, setFilters, onFilter }) => {
         </div>
         <div className="input-box">
           <Input
-            inputValue={filters.keyword}
-            setValue={(val) =>
-              setFilters((prev) => ({ ...prev, keyword: val }))
-            }
-            onKeyDown={handleKeyPress}
+            inputValue={searchInput}
+            setValue={(val) => setSearchInput(val)}
+            onKeyDown={(e) => e.key === "Enter" && onSearch()}
           />
           <button
             type="button"
             className="pj-search__btn"
-            onClick={handleKeywordSearch}
+            onClick={onSearch}
           ></button>
         </div>
       </div>

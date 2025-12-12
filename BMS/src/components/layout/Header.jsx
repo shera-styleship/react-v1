@@ -48,7 +48,7 @@ function Header({ attendanceToggle, onAttendanceToggle, onLnbToggle }) {
               src={imgSrc}
               alt={loginUser?.userName || "게스트"}
               onError={(e) => {
-                e.currentTarget.src = "/images/default.jpg";
+                e.currentTarget.src = "/images/default.png";
               }}
             />
           </div>
