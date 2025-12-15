@@ -37,7 +37,7 @@
 
 | api 필드          | 타입     | 설명                                                  | 예시       |
 | :-------------- | :----- | :-------------------------------------------------- | :------- |
-| memberID        | string | 프로젝트 작성자  ID | `"anuy"` |
+| memberID        | string | 프로젝트 작성자  ID | `"company"` |
 | projectNo       | number | 고객사 브랜드 고유 번호        | `326`    |
 | clientCompanyNo | number | 고객사 고유 번호           | `186`    |
 | workStatus	|  string | 프로젝트 진행 상태 (한글) | `"접수"` |
@@ -106,5 +106,6 @@
 | STYLESHIP | DV    | test99 | 관리자 |
 | STYLESHIP | SR    | test11 | 스마트 |
 | STYLESHIP | O2O   | test12 | 고양이 |
+
 
 
