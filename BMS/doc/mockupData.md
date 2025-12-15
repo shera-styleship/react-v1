@@ -44,9 +44,9 @@
 | workTeam	|  string | 담당 팀명 | `\"SR\"` |
 
 ** 개발팀 요청사항: 
-1. workStatus 가 한글 라벨인데, 기존 라벨을 유지하고 영문 혹은 숫자 코드로 상태를 관리할 수 있는 필드를 추가적으로 내려주실 수 있나요? 
+1. workStatus 가 한글 라벨인데, 기존 라벨을 유지하고 영문 혹은 숫자 코드로 상태를 관리할 수 있는 필드를 추가적으로 내려주실 수 있나요?  
 예: { workStatus: "접수", workStatusCode: "receipt" }
-2. workTeam 이 현재 "\"SR\"" 형태로 내려오는데, 여러 팀이 가능하다면 배열 형태로 내려주실 수 있나요? 
+2. workTeam 이 현재 "\"SR\"" 형태로 내려오는데, 여러 팀이 가능하다면 배열 형태로 내려주실 수 있나요?  
 예: { workTeam: ["SR","DV"] }
 
 
@@ -106,4 +106,5 @@
 | STYLESHIP | DV    | test99 | 관리자 |
 | STYLESHIP | SR    | test11 | 스마트 |
 | STYLESHIP | O2O   | test12 | 고양이 |
+
 
