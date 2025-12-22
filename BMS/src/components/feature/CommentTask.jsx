@@ -4,6 +4,7 @@ import { useState, useEffect, useRef, useContext, useMemo } from 'react';
 import { UserDataContext } from '@/App';
 import Mentions from '@components/feature/Mentions.jsx';
 import { API_BASE } from '@/utils/env';
+import TeamSorting from '@components/feature/TeamSorting';
 
 // ✅ 날짜 포맷팅
 const getFormattedDate = (isoDate) => {
@@ -33,7 +34,7 @@ const humanizeMentions = (text) => {
 	return text.replace(/\@\[(.+?)\]\((.+?)\)/g, `<span class="mention">@$1</span>`);
 };
 
-const CommentTask = ({ projectId, projectCompany, projectTitle }) => {
+const CommentTask = ({ projectId, projectCompany, projectTitle, workTeam, onSaveWorkTeam }) => {
 	const { userData, auth } = useContext(UserDataContext);
 
 	// 🔥 1) userData에서 로그인 유저 찾기 (userId 우선, 없으면 id)
@@ -56,6 +57,7 @@ const CommentTask = ({ projectId, projectCompany, projectTitle }) => {
 	const [newComment, setNewComment] = useState('');
 	const [isSubmitting, setIsSubmitting] = useState(false);
 	const [selectedFile, setSelectedFile] = useState(null);
+	const [isAssignOpen, setAssignOpen] = useState(false);
 
 	const commentEndRef = useRef(null);
 	const optionRef = useRef(null);
@@ -135,11 +137,12 @@ const CommentTask = ({ projectId, projectCompany, projectTitle }) => {
 		if ((!newComment.trim() && !selectedFile) || isSubmitting) return;
 
 		const createdAt = new Date().toISOString();
+		const uid = String(currentUser?.userId ?? currentUser?.id ?? currentUser?.memberID ?? '');
 
 		// ✅ DB에 저장할 최소 데이터 구조
 		const baseData = {
 			projectId: String(projectId),
-			userId: currentUser.id,
+			userId: uid,
 			createdAt,
 		};
 
@@ -296,7 +299,7 @@ const CommentTask = ({ projectId, projectCompany, projectTitle }) => {
 							파일 업로드
 						</button>
 						<input type='file' ref={fileInputRef} style={{ display: 'none' }} onChange={handleFileChange} />
-						<button type='button' className='set-manager__btn'>
+						<button type='button' className='set-manager__btn' onClick={() => setAssignOpen(true)}>
 							작업 위임
 						</button>
 						<button type='button' className='cmt-write__btn' onClick={handleSubmit} disabled={isSubmitting}>
@@ -305,6 +308,16 @@ const CommentTask = ({ projectId, projectCompany, projectTitle }) => {
 					</div>
 				</div>
 			</div>
+			{isAssignOpen && (
+				<TeamSorting
+					onClose={() => setAssignOpen(false)}
+					projectTitle={projectTitle}
+					brand={projectCompany}
+					workNo={projectId}
+					workTeam={workTeam}
+					onSaveWorkTeam={onSaveWorkTeam}
+				/>
+			)}
 		</div>
 	);
 };
