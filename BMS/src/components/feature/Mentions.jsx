@@ -1,10 +1,10 @@
 // src/components/feature/Mentions.jsx
 import "@components/feature/Mentions.css";
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState, useCallback } from "react";
 import { MentionsInput, Mention } from "react-mentions";
 import { API_BASE } from "@/utils/env";
 
-const Mentions = ({ value, onChange, currentUser }) => {
+const Mentions = ({ value, onChange, currentUser, onSubmit }) => {
   const [userData, setUserData] = useState([]);
   const portalRef = useRef(null);
 
@@ -24,7 +24,6 @@ const Mentions = ({ value, onChange, currentUser }) => {
           : Array.isArray(list?.userInfo)
           ? list.userInfo
           : [];
-
         setUserData(arr || []);
       } catch (e) {
         console.error(e);
@@ -41,35 +40,30 @@ const Mentions = ({ value, onChange, currentUser }) => {
       .replace(/\s+/g, "")
       .replace(/styleship/gi, "styleship");
 
-  // 2) 권한 규칙 (여기만 살짝 수정해서 예전처럼 느슨하게)
+  // 2) 권한 규칙
   const canMention = (viewer, target) => {
     if (!target) return false;
-
-    // viewer가 없으면 일단 모두 허용 (로그인 정보 아직 없을 때)
     if (!viewer) return true;
 
     const viewerId = String(viewer.id ?? "");
     const targetId = String(target.id ?? "");
 
-    // 자기 자신은 제외
+    // 자기 자신 제외
     if (viewerId && targetId && viewerId === targetId) return false;
 
-    // 🔥 핵심 수정 포인트:
-    // role 안 들어와 있으면 ADMIN처럼 취급해서 예전처럼 전체 보이게
+    // role 없으면 ADMIN처럼
     const viewerRole = String(viewer.role || "ADMIN").toUpperCase();
     if (viewerRole === "ADMIN") return true;
 
-    // USER 인 경우에만 회사 제한 로직 사용
     const v = normalizeCompany(viewer.userCompany);
     const t = normalizeCompany(target.userCompany);
 
     return !!(v && t && (v === t || v === "styleship" || t === "styleship"));
   };
 
-  // 3) react-mentions용 데이터로 변환
+  // 3) react-mentions용 데이터
   const mentionBase = useMemo(() => {
     const src = userData || [];
-
     return src
       .filter((u) => canMention(currentUser, u))
       .map((u, i) => ({
@@ -115,15 +109,54 @@ const Mentions = ({ value, onChange, currentUser }) => {
     callback(list);
   };
 
+  // ✅ 추천 목록 열려있으면 Enter는 "선택" 용도로 쓰이기 때문에 전송 막기
+  const isSuggestionOpen = useCallback(() => {
+    // react-mentions 기본 클래스들(버전에 따라 조금 다를 수 있어 방어적으로 체크)
+    const root =
+      document.querySelector(".mentions__suggestions") ||
+      document.querySelector(".mentions__suggestions__list") ||
+      document.querySelector(".mentions__suggestions__item");
+    if (!root) return false;
+
+    // 화면에 실제로 보이는지 체크
+    const el = root.classList?.contains("mentions__suggestions")
+      ? root
+      : root.closest(".mentions__suggestions") || root;
+    if (!el) return true;
+    return !!(el.offsetParent !== null);
+  }, []);
+
+  const handleKeyDown = (e) => {
+    // 한글 IME 조합 중 Enter는 무시
+    if (e.nativeEvent?.isComposing) return;
+
+    if (e.key === "Enter") {
+      // 멘션 추천창 열려있으면 Enter는 선택용
+      if (isSuggestionOpen()) return;
+
+      // Shift or Ctrl 눌린 상태 → 줄바꿈
+      if (e.shiftKey || e.ctrlKey) {
+        e.preventDefault(); // react-mentions가 엔터 먹는 경우 방지
+        onChange?.((value ?? "") + "\n");
+        return;
+      }
+
+      // 그냥 Enter → 전송
+      e.preventDefault();
+      e.stopPropagation();
+      onSubmit?.();
+    }
+  };
+
   return (
     <div>
       <MentionsInput
         className="mentionWrap"
         value={value ?? ""}
-        // ⭐ 여기도 예전 코드랑 달라진 핵심: newValue 사용해야 함
         onChange={(e, newValue) => {
           onChange?.(newValue ?? "");
         }}
+        onKeyDown={handleKeyDown}
         placeholder="내용을 입력하세요. @를 입력하면 멘션이 가능합니다."
         markup="@[__display__](__id__)"
         allowSuggestionsAboveCursor
