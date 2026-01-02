@@ -133,7 +133,7 @@ function Lnb() {
       </div>
 
       {/* ✅ 직원만 프로젝트 생성 모달 열리도록 */}
-      {isStaff && showNewProject && alertState === "on" && (
+      {showNewProject && alertState === "on" && (
         <NewProject
           onClose={() => {
             setShowNewProject(false);
